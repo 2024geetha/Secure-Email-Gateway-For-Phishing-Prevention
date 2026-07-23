@@ -58,7 +58,7 @@ export default function HistoryPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
             Scan History
           </h1>
-          <p className="text-slate-400 text-base">
+          <p className="text-purple-200 text-base">
             Chronological timeline of all your email threat analyses.
           </p>
         </motion.div>
@@ -71,10 +71,10 @@ export default function HistoryPage() {
         transition={{ duration: 0.5, delay: 0.1 }}
         className="relative max-w-2xl mx-auto"
       >
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-200" />
         <Input
           placeholder="Search history by subject or sender..."
-          className="pl-12 h-14 rounded-2xl bg-[#111827] border-white/10 text-base shadow-lg focus-visible:ring-blue-500/50 transition-all"
+          className="pl-12 h-14 rounded-2xl bg-[#0a0014] border-purple-500/20 text-base shadow-lg focus-visible:ring-blue-500/50 transition-all"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -94,12 +94,12 @@ export default function HistoryPage() {
               className="flex items-center gap-4 mb-6 relative z-10"
             >
               <div className="hidden sm:block w-[100px] text-right">
-                <span className="text-sm font-semibold text-slate-300">{date.split(',')[0]}</span>
-                <p className="text-xs text-slate-500">{date.split(',')[1]}</p>
+                <span className="text-sm font-semibold text-purple-100">{date.split(',')[0]}</span>
+                <p className="text-xs text-purple-300/70">{date.split(',')[1]}</p>
               </div>
-              <div className="h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)] ring-4 ring-[#030712] sm:ml-[-5px]" />
+              <div className="h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)] ring-4 ring-[#000000] sm:ml-[-5px]" />
               <div className="sm:hidden">
-                <span className="text-sm font-semibold text-slate-300">{date}</span>
+                <span className="text-sm font-semibold text-purple-100">{date}</span>
               </div>
             </motion.div>
 
@@ -116,7 +116,7 @@ export default function HistoryPage() {
                     transition={{ delay: groupIndex * 0.1 + i * 0.05 }}
                   >
                     <Card className={cn(
-                      "overflow-hidden transition-all duration-300 border-white/10",
+                      "overflow-hidden transition-all duration-300 border-purple-500/20",
                       isOpen ? "shadow-[0_0_30px_rgba(0,0,0,0.5)] border-white/20" : "hover:border-white/20"
                     )}>
                       <button
@@ -133,16 +133,16 @@ export default function HistoryPage() {
 
                           <div className="flex-1 min-w-0 text-left sm:hidden">
                             <p className="text-base font-semibold text-white truncate">{scan.subject}</p>
-                            <p className="text-sm text-slate-400 truncate">{scan.sender}</p>
+                            <p className="text-sm text-purple-200 truncate">{scan.sender}</p>
                           </div>
                         </div>
 
                         <div className="hidden sm:block flex-1 min-w-0 text-left">
                           <p className="text-base font-semibold text-white truncate mb-1">{scan.subject}</p>
                           <div className="flex items-center gap-3">
-                            <span className="text-sm text-slate-400 truncate max-w-[200px] lg:max-w-[300px]">{scan.sender}</span>
+                            <span className="text-sm text-purple-200 truncate max-w-[200px] lg:max-w-[300px]">{scan.sender}</span>
                             <span className="text-slate-600">•</span>
-                            <div className="flex items-center gap-1.5 text-sm text-slate-500">
+                            <div className="flex items-center gap-1.5 text-sm text-purple-300/70">
                               <Clock className="h-3.5 w-3.5" />
                               {formatDate(scan.receivedAt).split(',')[1]}
                             </div>
@@ -155,7 +155,7 @@ export default function HistoryPage() {
                               <div className="text-xl font-bold" style={{ color: threat.color }}>
                                 {scan.threatScore}
                               </div>
-                              <div className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">Score</div>
+                              <div className="text-[10px] uppercase tracking-wider text-purple-300/70 font-medium">Score</div>
                             </div>
                             <Badge
                               style={{
@@ -168,11 +168,11 @@ export default function HistoryPage() {
                               {threat.label}
                             </Badge>
                           </div>
-                          <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center">
+                          <div className="h-8 w-8 rounded-full bg-purple-500/5 flex items-center justify-center">
                             {isOpen ? (
-                              <ChevronUp className="h-4 w-4 text-slate-400" />
+                              <ChevronUp className="h-4 w-4 text-purple-200" />
                             ) : (
-                              <ChevronDown className="h-4 w-4 text-slate-400" />
+                              <ChevronDown className="h-4 w-4 text-purple-200" />
                             )}
                           </div>
                         </div>
@@ -188,28 +188,28 @@ export default function HistoryPage() {
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="overflow-hidden"
                           >
-                            <div className="p-5 sm:p-6 bg-black/20 border-t border-white/5">
+                            <div className="p-5 sm:p-6 bg-black/20 border-t border-purple-500/10">
                               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div className="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <ShieldAlert className="h-4 w-4 text-slate-400" />
-                                    <p className="text-xs font-medium text-slate-400">Threat Category</p>
+                                    <ShieldAlert className="h-4 w-4 text-purple-200" />
+                                    <p className="text-xs font-medium text-purple-200">Threat Category</p>
                                   </div>
                                   <p className="text-sm font-semibold text-white">{scan.category}</p>
                                 </div>
-                                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div className="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <CheckCircle2 className="h-4 w-4 text-slate-400" />
-                                    <p className="text-xs font-medium text-slate-400">Analysis Status</p>
+                                    <CheckCircle2 className="h-4 w-4 text-purple-200" />
+                                    <p className="text-xs font-medium text-purple-200">Analysis Status</p>
                                   </div>
                                   <p className="text-sm font-semibold text-green-400 capitalize">{scan.status}</p>
                                 </div>
-                                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 lg:col-span-2">
+                                <div className="p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20 lg:col-span-2">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <FileText className="h-4 w-4 text-slate-400" />
-                                    <p className="text-xs font-medium text-slate-400">Source File</p>
+                                    <FileText className="h-4 w-4 text-purple-200" />
+                                    <p className="text-xs font-medium text-purple-200">Source File</p>
                                   </div>
-                                  <p className="text-sm font-mono text-slate-300 truncate">
+                                  <p className="text-sm font-mono text-purple-100 truncate">
                                     {scan.fileName || "Pasted raw content"}
                                   </p>
                                 </div>
@@ -243,11 +243,11 @@ export default function HistoryPage() {
             animate={{ opacity: 1 }}
             className="flex flex-col items-center justify-center py-20 text-center"
           >
-            <div className="h-24 w-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6">
-              <Search className="h-10 w-10 text-slate-500" />
+            <div className="h-24 w-24 rounded-full bg-purple-500/5 border border-purple-500/20 flex items-center justify-center mb-6">
+              <Search className="h-10 w-10 text-purple-300/70" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-2">No history found</h3>
-            <p className="text-slate-400 max-w-md mx-auto">
+            <p className="text-purple-200 max-w-md mx-auto">
               We couldn't find any past scans matching your search. Try adjusting your terms or analyze a new email.
             </p>
             <Link href="/dashboard/analyze" className="mt-8">

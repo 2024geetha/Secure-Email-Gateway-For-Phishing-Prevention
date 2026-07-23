@@ -38,7 +38,7 @@ export default function ThreatIntelligencePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-white tracking-tight">Threat Intelligence</h1>
-          <p className="text-slate-400 mt-1">
+          <p className="text-purple-200 mt-1">
             Real-time global threat visibility and attack campaign tracking.
           </p>
         </div>
@@ -76,8 +76,8 @@ export default function ThreatIntelligencePage() {
                   </div>
                   <div className="flex flex-col items-end">
                     <span className={cn(
-                      "text-xs font-semibold px-2 py-1 rounded-full bg-white/5 border border-white/10",
-                      item.change.startsWith('+') ? "text-red-400" : "text-slate-400"
+                      "text-xs font-semibold px-2 py-1 rounded-full bg-purple-500/5 border border-purple-500/20",
+                      item.change.startsWith('+') ? "text-red-400" : "text-purple-200"
                     )}>
                       {item.change} today
                     </span>
@@ -85,8 +85,8 @@ export default function ThreatIntelligencePage() {
                 </div>
                 <div className="relative z-10">
                   <div className="text-3xl font-bold text-white tracking-tight mb-1">{item.value}</div>
-                  <div className="text-sm font-medium text-slate-300">{item.label}</div>
-                  <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
+                  <div className="text-sm font-medium text-purple-100">{item.label}</div>
+                  <div className="text-xs text-purple-300/70 mt-1">{item.desc}</div>
                 </div>
               </Card>
             </motion.div>
@@ -95,7 +95,7 @@ export default function ThreatIntelligencePage() {
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="w-full justify-start overflow-x-auto bg-transparent border-b border-white/10 rounded-none p-0 h-auto mb-8 gap-6">
+        <TabsList className="w-full justify-start overflow-x-auto bg-transparent border-b border-purple-500/20 rounded-none p-0 h-auto mb-8 gap-6">
           {[
             { value: "overview", label: "Overview", icon: Activity },
             { value: "domains", label: "Threat Domains", icon: Globe },
@@ -106,7 +106,7 @@ export default function ThreatIntelligencePage() {
             <TabsTrigger 
               key={tab.value} 
               value={tab.value}
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-purple-500 rounded-none px-0 py-4 text-slate-400 data-[state=active]:text-white transition-all whitespace-nowrap"
+              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-purple-500 rounded-none px-0 py-4 text-purple-200 data-[state=active]:text-white transition-all whitespace-nowrap"
             >
               <tab.icon className="mr-2 h-4 w-4" /> {tab.label}
             </TabsTrigger>
@@ -151,7 +151,7 @@ export default function ThreatIntelligencePage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-white">{mw.name}</p>
-                        <p className="text-xs text-slate-500">{mw.type}</p>
+                        <p className="text-xs text-purple-300/70">{mw.type}</p>
                       </div>
                     </div>
                     <span className="text-sm font-bold text-white">{mw.count}</span>
@@ -169,12 +169,12 @@ export default function ThreatIntelligencePage() {
                 {targetedBrands.slice(0, 4).map((brand, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-lg">
+                      <div className="h-8 w-8 rounded-lg bg-purple-500/5 border border-purple-500/20 flex items-center justify-center text-lg">
                         {brand.logo}
                       </div>
                       <div>
                         <p className="text-sm font-medium text-white">{brand.brand}</p>
-                        <p className="text-xs text-slate-500">{brand.percentage}% of attacks</p>
+                        <p className="text-xs text-purple-300/70">{brand.percentage}% of attacks</p>
                       </div>
                     </div>
                     <span className="text-sm font-bold text-white">{brand.count}</span>
@@ -197,7 +197,7 @@ export default function ThreatIntelligencePage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-white">{c.country}</p>
-                        <p className="text-xs text-slate-500">{c.percentage}% of traffic</p>
+                        <p className="text-xs text-purple-300/70">{c.percentage}% of traffic</p>
                       </div>
                     </div>
                     <span className="text-sm font-bold text-white">{c.attacks}</span>
@@ -238,20 +238,20 @@ export default function ThreatIntelligencePage() {
                     <h3 className="text-lg font-mono font-medium text-white break-all mb-2">
                       {domain.domain}
                     </h3>
-                    <p className="text-sm text-slate-400 mb-6">{domain.threatType}</p>
+                    <p className="text-sm text-purple-200 mb-6">{domain.threatType}</p>
                     
-                    <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-black/20 border border-white/5">
+                    <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-black/20 border border-purple-500/10">
                       <div>
-                        <p className="text-xs text-slate-500 mb-1">Detections</p>
+                        <p className="text-xs text-purple-300/70 mb-1">Detections</p>
                         <p className="text-lg font-bold text-white">{domain.count.toLocaleString()}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500 mb-1">Risk Score</p>
+                        <p className="text-xs text-purple-300/70 mb-1">Risk Score</p>
                         <p className="text-lg font-bold" style={{ color: threat.color }}>{domain.riskScore}/100</p>
                       </div>
-                      <div className="col-span-2 pt-2 border-t border-white/5">
-                        <p className="text-xs text-slate-500 mb-1">Last Seen</p>
-                        <p className="text-sm text-slate-300">{domain.lastSeen}</p>
+                      <div className="col-span-2 pt-2 border-t border-purple-500/10">
+                        <p className="text-xs text-purple-300/70 mb-1">Last Seen</p>
+                        <p className="text-sm text-purple-100">{domain.lastSeen}</p>
                       </div>
                     </div>
                   </Card>
@@ -272,21 +272,21 @@ export default function ThreatIntelligencePage() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Card className="p-6 h-full flex flex-col items-center text-center group">
-                  <div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <div className="h-20 w-20 rounded-full bg-purple-500/5 border border-purple-500/20 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     {brand.logo}
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-1">{brand.brand}</h3>
-                  <p className="text-sm text-slate-400 mb-6">{brand.percentage}% of all impersonations</p>
+                  <p className="text-sm text-purple-200 mb-6">{brand.percentage}% of all impersonations</p>
                   
-                  <div className="w-full p-4 rounded-xl bg-black/20 border border-white/5 mt-auto">
+                  <div className="w-full p-4 rounded-xl bg-black/20 border border-purple-500/10 mt-auto">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs text-slate-500">Attack Volume</span>
+                      <span className="text-xs text-purple-300/70">Attack Volume</span>
                       {brand.trend === "up" ? (
                         <span className="flex items-center text-xs text-red-400"><TrendingUp className="h-3 w-3 mr-1" /> Rising</span>
                       ) : brand.trend === "down" ? (
                         <span className="flex items-center text-xs text-green-400"><TrendingDown className="h-3 w-3 mr-1" /> Falling</span>
                       ) : (
-                        <span className="flex items-center text-xs text-slate-400"><Minus className="h-3 w-3 mr-1" /> Stable</span>
+                        <span className="flex items-center text-xs text-purple-200"><Minus className="h-3 w-3 mr-1" /> Stable</span>
                       )}
                     </div>
                     <p className="text-2xl font-bold text-white">{brand.count.toLocaleString()}</p>
@@ -323,10 +323,10 @@ export default function ThreatIntelligencePage() {
                         <span className="text-base font-bold text-white block">
                           {c.attacks.toLocaleString()}
                         </span>
-                        <span className="text-xs text-slate-400">{c.percentage}% of total</span>
+                        <span className="text-xs text-purple-200">{c.percentage}% of total</span>
                       </div>
                     </div>
-                    <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+                    <div className="h-2 rounded-full bg-purple-500/5 overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(c.percentage / 35) * 100}%` }}
@@ -343,7 +343,7 @@ export default function ThreatIntelligencePage() {
               <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
                 <Globe className="h-5 w-5 text-blue-400" /> Global Heatmap
               </h3>
-              <div className="flex-1 rounded-2xl bg-black/40 border border-white/5 relative overflow-hidden flex items-center justify-center min-h-[400px]">
+              <div className="flex-1 rounded-2xl bg-black/40 border border-purple-500/10 relative overflow-hidden flex items-center justify-center min-h-[400px]">
                 {/* Abstract map visualization */}
                 <div className="absolute inset-0 opacity-20" style={{
                   backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 60%)'
@@ -356,10 +356,10 @@ export default function ThreatIntelligencePage() {
                 <div className="absolute top-[60%] left-[30%] h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(139,92,246,1)] animate-pulse" style={{ animationDelay: '1.5s' }} />
                 <div className="absolute top-[50%] left-[80%] h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,1)] animate-pulse" style={{ animationDelay: '2s' }} />
                 
-                <div className="relative z-10 text-center p-6 rounded-2xl bg-black/60 backdrop-blur-md border border-white/10">
+                <div className="relative z-10 text-center p-6 rounded-2xl bg-black/60 backdrop-blur-md border border-purple-500/20">
                   <Globe className="h-16 w-16 text-blue-400 mx-auto mb-4 opacity-80" />
                   <p className="text-base font-semibold text-white">Interactive 3D Globe</p>
-                  <p className="text-sm text-slate-400 mt-2 max-w-[200px]">
+                  <p className="text-sm text-purple-200 mt-2 max-w-[200px]">
                     Visualizing real-time attack vectors and origin points globally.
                   </p>
                 </div>
@@ -398,15 +398,15 @@ export default function ThreatIntelligencePage() {
                     </div>
                     
                     <h3 className="text-xl font-bold text-white mb-1">{mw.name}</h3>
-                    <p className="text-sm text-slate-400 mb-6">{mw.type}</p>
+                    <p className="text-sm text-purple-200 mb-6">{mw.type}</p>
                     
                     <div className="mt-auto space-y-4">
-                      <div className="p-4 rounded-xl bg-black/20 border border-white/5">
+                      <div className="p-4 rounded-xl bg-black/20 border border-purple-500/10">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs text-slate-500">Total Detections</span>
+                          <span className="text-xs text-purple-300/70">Total Detections</span>
                           <span className="text-sm font-bold text-white">{mw.count.toLocaleString()}</span>
                         </div>
-                        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div className="h-1.5 rounded-full bg-purple-500/5 overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${(mw.count / 1500) * 100}%` }}
@@ -418,8 +418,8 @@ export default function ThreatIntelligencePage() {
                       </div>
                       
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500">First Detected</span>
-                        <span className="text-slate-300 font-medium">{mw.firstDetected}</span>
+                        <span className="text-purple-300/70">First Detected</span>
+                        <span className="text-purple-100 font-medium">{mw.firstDetected}</span>
                       </div>
                     </div>
                   </Card>

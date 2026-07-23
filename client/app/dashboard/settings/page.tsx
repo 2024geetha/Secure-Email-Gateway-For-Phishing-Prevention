@@ -39,7 +39,7 @@ function Toggle({
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-        checked ? "bg-[#10b981]" : "bg-[rgba(255,255,255,0.1)]"
+        checked ? "bg-[#a855f7]" : "bg-[rgba(168,85,247,0.25)]"
       }`}
     >
       <span
@@ -257,7 +257,7 @@ export default function SettingsPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4"
+                  className="rounded-xl border border-[rgba(168,85,247,0.2)] bg-[rgba(255,255,255,0.02)] p-4"
                 >
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div>
@@ -270,7 +270,7 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.3)] px-3 py-2">
+                    <div className="flex-1 rounded-lg border border-[rgba(168,85,247,0.2)] bg-[rgba(0,0,0,0.3)] px-3 py-2">
                       <code className="text-xs font-mono text-[#888]">
                         {showApiKey ? key.key : `${key.key.slice(0, 12)}${"•".repeat(16)}`}
                       </code>
@@ -298,11 +298,11 @@ export default function SettingsPage() {
               ))}
             </div>
 
-            <div className="mt-5 rounded-xl border border-[rgba(16,185,129,0.15)] bg-[rgba(16,185,129,0.05)] p-4">
+            <div className="mt-5 rounded-xl border border-[rgba(168,85,247,0.15)] bg-[rgba(168,85,247,0.05)] p-4">
               <div className="flex items-start gap-3">
-                <Shield className="h-4 w-4 text-[#10b981] shrink-0 mt-0.5" />
+                <Shield className="h-4 w-4 text-[#a855f7] shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-xs font-medium text-[#10b981]">API Security Notice</p>
+                  <p className="text-xs font-medium text-[#a855f7]">API Security Notice</p>
                   <p className="text-xs text-[#555] mt-1">
                     Never share your API keys publicly. Keys are encrypted at rest using AES-256. Rotate keys immediately if compromised.
                   </p>

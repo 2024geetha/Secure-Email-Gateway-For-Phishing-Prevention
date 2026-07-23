@@ -73,7 +73,7 @@ export default function ReportsPage() {
   };
 
   const SortIcon = ({ field }: { field: "threatScore" | "receivedAt" }) => {
-    if (sortField !== field) return <ChevronsUpDown className="h-3.5 w-3.5 ml-1 text-slate-500" />;
+    if (sortField !== field) return <ChevronsUpDown className="h-3.5 w-3.5 ml-1 text-purple-300/70" />;
     return sortDir === "asc" ? (
       <ChevronUp className="h-3.5 w-3.5 ml-1 text-purple-400" />
     ) : (
@@ -87,12 +87,12 @@ export default function ReportsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-white tracking-tight">Reports</h1>
-          <p className="text-slate-400 mt-1">
+          <p className="text-purple-200 mt-1">
             Complete scan history with threat scores and categories.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="rounded-xl bg-white/5 border-white/10 hover:bg-white/10">
+          <Button variant="outline" className="rounded-xl bg-purple-500/5 border-purple-500/20 hover:bg-purple-500/10">
             <FileJson className="mr-2 h-4 w-4" /> Export JSON
           </Button>
           <Button className="rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)]">
@@ -122,7 +122,7 @@ export default function ReportsPage() {
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-white tracking-tight">{item.value}</div>
-                  <div className="text-sm font-medium text-slate-400">{item.label}</div>
+                  <div className="text-sm font-medium text-purple-200">{item.label}</div>
                 </div>
               </div>
             </Card>
@@ -131,21 +131,21 @@ export default function ReportsPage() {
       </div>
 
       {/* Filters */}
-      <Card className="p-2 sm:p-4 bg-black/20 border-white/5 backdrop-blur-md">
+      <Card className="p-2 sm:p-4 bg-black/20 border-purple-500/10 backdrop-blur-md">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-200" />
             <Input
               placeholder="Search by subject or sender..."
-              className="pl-12 h-12 rounded-xl bg-white/5 border-white/10 text-base focus-visible:ring-purple-500/50"
+              className="pl-12 h-12 rounded-xl bg-purple-500/5 border-purple-500/20 text-base focus-visible:ring-purple-500/50"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <div className="flex items-center gap-3 overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 shrink-0">
-              <Filter className="h-4 w-4 text-slate-400" />
-              <span className="text-sm font-medium text-slate-300">Filter:</span>
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-500/5 border border-purple-500/20 shrink-0">
+              <Filter className="h-4 w-4 text-purple-200" />
+              <span className="text-sm font-medium text-purple-100">Filter:</span>
             </div>
             <div className="flex gap-2">
               {ALL_LEVELS.map((level) => (
@@ -156,7 +156,7 @@ export default function ReportsPage() {
                     "px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap",
                     filter === level
                       ? "bg-purple-500/20 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(139,92,246,0.15)]"
-                      : "bg-white/5 text-slate-400 border border-transparent hover:bg-white/10 hover:text-white"
+                      : "bg-purple-500/5 text-purple-200 border border-transparent hover:bg-purple-500/10 hover:text-white"
                   )}
                 >
                   {level}
@@ -173,33 +173,33 @@ export default function ReportsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <Card className="overflow-hidden border-white/10">
+        <Card className="overflow-hidden border-purple-500/20">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader className="bg-black/40">
-                <TableRow className="border-white/5 hover:bg-transparent">
-                  <TableHead className="w-12 text-center text-slate-400">#</TableHead>
-                  <TableHead className="text-slate-400 font-medium">Email Subject</TableHead>
-                  <TableHead className="text-slate-400 font-medium">Sender</TableHead>
-                  <TableHead className="text-slate-400 font-medium">Category</TableHead>
+                <TableRow className="border-purple-500/10 hover:bg-transparent">
+                  <TableHead className="w-12 text-center text-purple-200">#</TableHead>
+                  <TableHead className="text-purple-200 font-medium">Email Subject</TableHead>
+                  <TableHead className="text-purple-200 font-medium">Sender</TableHead>
+                  <TableHead className="text-purple-200 font-medium">Category</TableHead>
                   <TableHead>
                     <button
-                      className="flex items-center text-slate-400 font-medium hover:text-white transition-colors group"
+                      className="flex items-center text-purple-200 font-medium hover:text-white transition-colors group"
                       onClick={() => toggleSort("threatScore")}
                     >
                       Score <SortIcon field="threatScore" />
                     </button>
                   </TableHead>
-                  <TableHead className="text-slate-400 font-medium">Level</TableHead>
+                  <TableHead className="text-purple-200 font-medium">Level</TableHead>
                   <TableHead>
                     <button
-                      className="flex items-center text-slate-400 font-medium hover:text-white transition-colors group"
+                      className="flex items-center text-purple-200 font-medium hover:text-white transition-colors group"
                       onClick={() => toggleSort("receivedAt")}
                     >
                       Date <SortIcon field="receivedAt" />
                     </button>
                   </TableHead>
-                  <TableHead className="text-right text-slate-400 font-medium">Action</TableHead>
+                  <TableHead className="text-right text-purple-200 font-medium">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -213,9 +213,9 @@ export default function ReportsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2, delay: i * 0.03 }}
-                        className="border-white/5 hover:bg-white/[0.02] transition-colors group"
+                        className="border-purple-500/10 hover:bg-white/[0.02] transition-colors group"
                       >
-                        <TableCell className="text-slate-500 text-sm text-center font-mono">{i + 1}</TableCell>
+                        <TableCell className="text-purple-300/70 text-sm text-center font-mono">{i + 1}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-3">
                             <div
@@ -229,11 +229,11 @@ export default function ReportsPage() {
                             </span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-slate-400 text-sm max-w-[200px] truncate">
+                        <TableCell className="text-purple-200 text-sm max-w-[200px] truncate">
                           {scan.sender}
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm text-slate-400">{scan.category}</span>
+                          <span className="text-sm text-purple-200">{scan.category}</span>
                         </TableCell>
                         <TableCell>
                           <span className="text-base font-bold" style={{ color: threat.color }}>
@@ -252,13 +252,13 @@ export default function ReportsPage() {
                             {threat.label}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-slate-400">
+                        <TableCell className="text-sm text-purple-200">
                           {formatDate(scan.receivedAt)}
                         </TableCell>
                         <TableCell className="text-right">
                           <Link href="/dashboard/report">
-                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10">
-                              <ArrowUpRight className="h-4.5 w-4.5 text-slate-300" />
+                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity hover:bg-purple-500/10">
+                              <ArrowUpRight className="h-4.5 w-4.5 text-purple-100" />
                             </Button>
                           </Link>
                         </TableCell>
@@ -272,11 +272,11 @@ export default function ReportsPage() {
 
           {filtered.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6">
-                <Search className="h-8 w-8 text-slate-500" />
+              <div className="h-20 w-20 rounded-full bg-purple-500/5 border border-purple-500/20 flex items-center justify-center mb-6">
+                <Search className="h-8 w-8 text-purple-300/70" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">No results found</h3>
-              <p className="text-slate-400 max-w-sm mx-auto">
+              <p className="text-purple-200 max-w-sm mx-auto">
                 We couldn't find any scans matching your current search and filter criteria.
               </p>
               <Button 
@@ -290,21 +290,21 @@ export default function ReportsPage() {
           )}
 
           {/* Pagination */}
-          <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-black/20">
-            <p className="text-sm text-slate-400">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-purple-500/20 bg-black/20">
+            <p className="text-sm text-purple-200">
               Showing <span className="text-white font-medium">{filtered.length}</span> of <span className="text-white font-medium">{recentScans.length}</span> results
             </p>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="rounded-xl border-white/10 hover:bg-white/10" disabled>
+              <Button variant="outline" size="sm" className="rounded-xl border-purple-500/20 hover:bg-purple-500/10" disabled>
                 Previous
               </Button>
               <Button variant="outline" size="sm" className="rounded-xl w-9 bg-purple-500/20 border-purple-500/30 text-purple-300">
                 1
               </Button>
-              <Button variant="ghost" size="sm" className="rounded-xl w-9 text-slate-400 hover:text-white hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="rounded-xl w-9 text-purple-200 hover:text-white hover:bg-purple-500/10">
                 2
               </Button>
-              <Button variant="outline" size="sm" className="rounded-xl border-white/10 hover:bg-white/10">
+              <Button variant="outline" size="sm" className="rounded-xl border-purple-500/20 hover:bg-purple-500/10">
                 Next
               </Button>
             </div>
