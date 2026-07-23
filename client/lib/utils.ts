@@ -30,7 +30,7 @@ export function getThreatLevel(score: number): {
   if (score >= 60) return { label: "High Risk", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" };
   if (score >= 40) return { label: "Medium Risk", color: "#f59e0b", bg: "rgba(245,158,11,0.08)" };
   if (score >= 20) return { label: "Low Risk", color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
-  return { label: "Clean", color: "#10b981", bg: "rgba(16,185,129,0.12)" };
+  return { label: "Clean", color: "#8b5cf6", bg: "rgba(139,92,246,0.12)" };
 }
 
 export function getStatusColor(status: "passed" | "failed" | "warning" | "neutral") {
@@ -38,7 +38,7 @@ export function getStatusColor(status: "passed" | "failed" | "warning" | "neutra
     passed: { color: "#22c55e", bg: "rgba(34,197,94,0.12)", label: "Passed" },
     failed: { color: "#ef4444", bg: "rgba(239,68,68,0.12)", label: "Failed" },
     warning: { color: "#f59e0b", bg: "rgba(245,158,11,0.12)", label: "Warning" },
-    neutral: { color: "#b3b3b3", bg: "rgba(179,179,179,0.08)", label: "Unknown" },
+    neutral: { color: "#94a3b8", bg: "rgba(148,163,184,0.08)", label: "Unknown" },
   };
   return map[status];
 }

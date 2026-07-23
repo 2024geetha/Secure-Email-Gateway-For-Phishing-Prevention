@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sentinel AI — AI Email Security Copilot",
+  title: "Sentinel AI — Premium Email Security Copilot",
   description:
     "Analyze emails, detect phishing attacks, inspect headers, scan attachments, identify impersonation attempts, and understand cyber threats with explainable AI.",
   keywords: ["email security", "phishing detection", "AI security", "cybersecurity"],
@@ -32,7 +32,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full`}
       suppressHydrationWarning
     >
-      <body className="min-h-full antialiased bg-[#050505] text-white">
+      <body className="min-h-full antialiased bg-[#030712] text-white selection:bg-purple-500/30">
+        <div className="noise-bg" />
         {children}
       </body>
     </html>
