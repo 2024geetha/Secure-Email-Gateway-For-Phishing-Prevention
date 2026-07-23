@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -12,32 +11,32 @@ import {
   ArrowUpRight,
   Clock,
   ChevronRight,
+  Activity,
+  Globe,
+  Bot,
+  Zap
 } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   WeeklyScansChart,
   ThreatCategoriesPie,
-  TopBrandsChart,
-  MonthlyTrendChart,
 } from "@/components/charts";
 import {
   dashboardStats,
   weeklyScansData,
   threatCategoriesData,
-  topImpersonatedBrands,
-  monthlyTrendData,
   recentScans,
 } from "@/lib/mock-data";
 import { getThreatLevel, formatDate, formatNumber } from "@/lib/utils";
 
 function AnimatedNumber({ value }: { value: number }) {
-  const [displayed, setDisplayed] = useState(0);
+  const [displayed, setDisplayed] = React.useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     let start = 0;
     const end = value;
     const duration = 1200;
@@ -63,98 +62,112 @@ const statCards = [
     value: dashboardStats.emailsScanned,
     change: dashboardStats.emailsScannedChange,
     icon: Mail,
-    color: "#10b981",
+    color: "#8b5cf6", // Purple
+    bg: "rgba(139,92,246,0.1)",
   },
   {
     label: "Threats Blocked",
     value: dashboardStats.threatsBlocked,
     change: dashboardStats.threatsBlockedChange,
-    icon: AlertTriangle,
-    color: "#ef4444",
+    icon: Shield,
+    color: "#3b82f6", // Blue
+    bg: "rgba(59,130,246,0.1)",
   },
   {
     label: "High Risk Emails",
     value: dashboardStats.highRiskEmails,
     change: dashboardStats.highRiskChange,
-    icon: Shield,
-    color: "#f59e0b",
+    icon: AlertTriangle,
+    color: "#ef4444", // Red
+    bg: "rgba(239,68,68,0.1)",
   },
   {
     label: "Avg Threat Score",
     value: dashboardStats.avgThreatScore,
     change: dashboardStats.avgScoreChange,
-    icon: TrendingUp,
-    color: "#6366f1",
+    icon: Activity,
+    color: "#f59e0b", // Orange
+    bg: "rgba(245,158,11,0.1)",
     suffix: "/100",
   },
 ];
 
-const threatColors = ["#10b981", "#ef4444", "#f59e0b", "#6366f1", "#ec4899"];
-
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-          <p className="text-sm text-[#666] mt-0.5">Welcome back, Alex. Here's your security overview.</p>
-        </div>
-        <Link href="/dashboard/analyze">
-          <Button>
-            <Mail className="mr-2 h-4 w-4" />
-            Analyze Email
+    <div className="space-y-8">
+      {/* Hero Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-medium mb-3">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+            </span>
+            System Operational
+          </div>
+          <h1 className="text-3xl font-bold text-white tracking-tight">Security Overview</h1>
+          <p className="text-slate-400 mt-1">Real-time threat intelligence and email analysis.</p>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3"
+        >
+          <Button variant="outline" className="hidden sm:flex rounded-xl">
+            <Clock className="mr-2 h-4 w-4 text-slate-400" /> Last 7 Days
           </Button>
-        </Link>
+          <Link href="/dashboard/analyze">
+            <Button className="rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+              <Zap className="mr-2 h-4 w-4" /> Analyze Email
+            </Button>
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {statCards.map((card, i) => {
           const Icon = card.icon;
           const positive = card.change > 0;
           const isGoodPositive = card.label === "Emails Scanned" && positive;
-          const isBadPositive =
-            (card.label === "Threats Blocked" || card.label === "High Risk Emails") && positive;
+          const isBadPositive = (card.label === "Threats Blocked" || card.label === "High Risk Emails") && positive;
+          const trendColor = isBadPositive ? "#ef4444" : positive ? "#22c55e" : "#ef4444";
 
           return (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.4 }}
-              whileHover={{ y: -2 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
             >
-              <Card className="p-5">
+              <Card className="p-6 h-full flex flex-col justify-between group">
                 <div className="flex items-start justify-between mb-4">
                   <div
-                    className="h-8 w-8 rounded-lg flex items-center justify-center"
-                    style={{ backgroundColor: `${card.color}15`, border: `1px solid ${card.color}25` }}
+                    className="h-10 w-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 duration-300"
+                    style={{ backgroundColor: card.bg, border: `1px solid ${card.color}30` }}
                   >
-                    <Icon className="h-4 w-4" style={{ color: card.color }} />
+                    <Icon className="h-5 w-5" style={{ color: card.color }} />
                   </div>
                   <div
-                    className="flex items-center gap-1 text-xs font-medium"
-                    style={{
-                      color: isBadPositive ? "#ef4444" : positive ? "#22c55e" : "#ef4444",
-                    }}
+                    className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-white/5 border border-white/10"
+                    style={{ color: trendColor }}
                   >
-                    {positive ? (
-                      <TrendingUp className="h-3 w-3" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3" />
-                    )}
+                    {positive ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                     {Math.abs(card.change)}%
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <div className="text-2xl font-bold text-white">
+                <div>
+                  <div className="text-3xl font-bold text-white tracking-tight mb-1">
                     <AnimatedNumber value={card.value} />
-                    {card.suffix && (
-                      <span className="text-sm font-normal text-[#555]">{card.suffix}</span>
-                    )}
+                    {card.suffix && <span className="text-lg font-normal text-slate-500">{card.suffix}</span>}
                   </div>
-                  <p className="text-xs text-[#666]">{card.label}</p>
+                  <p className="text-sm text-slate-400 font-medium">{card.label}</p>
                 </div>
               </Card>
             </motion.div>
@@ -162,176 +175,195 @@ export default function DashboardPage() {
         })}
       </div>
 
-      {/* Charts Row 1 */}
-      <div className="grid lg:grid-cols-3 gap-4">
-        {/* Weekly Scans */}
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Main Chart */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.4 }}
           className="lg:col-span-2"
         >
-          <Card className="p-5">
-            <div className="flex items-center justify-between mb-5">
+          <Card className="p-6 h-full">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-sm font-semibold text-white">Weekly Scans</h3>
-                <p className="text-xs text-[#555] mt-0.5">Emails scanned vs threats detected</p>
+                <h3 className="text-lg font-semibold text-white">Threat Activity</h3>
+                <p className="text-sm text-slate-400">Scans vs detections over time</p>
               </div>
-              <div className="flex items-center gap-4 text-xs text-[#555]">
-                <div className="flex items-center gap-1.5">
-                  <div className="h-2 w-2 rounded-full bg-[#10b981]" />
+              <div className="flex items-center gap-4 text-sm text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="h-2.5 w-2.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(139,92,246,0.8)]" />
                   Scans
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="h-2 w-2 rounded-full bg-[#ef4444]" />
+                <div className="flex items-center gap-2">
+                  <div className="h-2.5 w-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
                   Threats
                 </div>
               </div>
             </div>
-            <WeeklyScansChart data={weeklyScansData} />
+            <div className="h-[300px] w-full">
+              <WeeklyScansChart data={weeklyScansData} />
+            </div>
           </Card>
         </motion.div>
 
-        {/* Threat Categories */}
+        {/* AI Copilot Widget */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col gap-6"
         >
-          <Card className="p-5">
-            <div className="mb-4">
-              <h3 className="text-sm font-semibold text-white">Threat Categories</h3>
-              <p className="text-xs text-[#555] mt-0.5">This week's distribution</p>
+          <Card className="p-6 flex-1 bg-gradient-to-br from-[#111827] to-[#1e1b4b] border-purple-500/20 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full pointer-events-none" />
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                <Bot className="h-5 w-5 text-purple-400" />
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-white">AI Copilot Insights</h3>
+                <p className="text-xs text-purple-300">Updated just now</p>
+              </div>
             </div>
-            <ThreatCategoriesPie data={threatCategoriesData} />
-            <div className="mt-4 space-y-2">
-              {threatCategoriesData.map((item, i) => (
-                <div key={i} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: threatColors[i] }}
-                    />
-                    <span className="text-[#888]">{item.name}</span>
-                  </div>
-                  <span className="text-white font-medium">{item.value}%</span>
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl bg-black/20 border border-white/5 backdrop-blur-sm">
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  "We've detected a <span className="text-red-400 font-medium">32% increase</span> in credential harvesting attempts targeting your finance department over the last 48 hours. I recommend updating your DMARC policies."
+                </p>
+              </div>
+              <Button className="w-full rounded-xl bg-white/10 hover:bg-white/20 text-white border-none shadow-none">
+                View Detailed Analysis
+              </Button>
+            </div>
+          </Card>
+
+          <Card className="p-6 flex-1">
+            <h3 className="text-base font-semibold text-white mb-4">Threat Distribution</h3>
+            <div className="h-[180px]">
+              <ThreatCategoriesPie data={threatCategoriesData} />
+            </div>
+          </Card>
+        </motion.div>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* Recent Scans */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <Card className="flex flex-col h-full">
+            <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-white/5">
+              <div>
+                <CardTitle>Recent Detections</CardTitle>
+                <p className="text-sm text-slate-400 mt-1">Latest high-risk emails isolated</p>
+              </div>
+              <Link href="/dashboard/history">
+                <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white rounded-lg">
+                  View All <ChevronRight className="ml-1 h-4 w-4" />
+                </Button>
+              </Link>
+            </CardHeader>
+            <CardContent className="p-0 flex-1">
+              <div className="divide-y divide-white/5">
+                {recentScans.slice(0, 5).map((scan) => {
+                  const threat = getThreatLevel(scan.threatScore);
+                  return (
+                    <Link key={scan.id} href="/dashboard/report" className="block hover:bg-white/[0.02] transition-colors p-4 sm:px-6">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center border"
+                          style={{ backgroundColor: threat.bg, borderColor: `${threat.color}30` }}
+                        >
+                          <Mail className="h-4.5 w-4.5" style={{ color: threat.color }} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-white truncate">{scan.subject}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs text-slate-400 truncate">{scan.sender}</span>
+                            <span className="text-slate-600">•</span>
+                            <span className="text-xs text-slate-500 flex items-center gap-1">
+                              <Clock className="h-3 w-3" /> {formatDate(scan.receivedAt)}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end gap-1 shrink-0">
+                          <span className="text-sm font-bold" style={{ color: threat.color }}>
+                            {scan.threatScore}/100
+                          </span>
+                          <Badge
+                            style={{ backgroundColor: threat.bg, color: threat.color, borderColor: `${threat.color}30` }}
+                            className="text-[10px] px-2 py-0"
+                          >
+                            {threat.label}
+                          </Badge>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Global Threat Map Placeholder */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <Card className="p-6 h-full flex flex-col">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-lg font-semibold text-white">Global Threat Origins</h3>
+                <p className="text-sm text-slate-400">Live attack mapping</p>
+              </div>
+              <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20">
+                <Globe className="mr-1.5 h-3 w-3" /> Live
+              </Badge>
+            </div>
+            
+            <div className="flex-1 rounded-2xl bg-black/20 border border-white/5 relative overflow-hidden flex items-center justify-center min-h-[300px]">
+              {/* Abstract map visualization */}
+              <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 60%)'
+              }} />
+              
+              {/* Map points */}
+              <div className="absolute top-[30%] left-[20%] h-3 w-3 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,1)] animate-pulse" />
+              <div className="absolute top-[40%] left-[60%] h-2 w-2 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(245,158,11,1)] animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute top-[25%] left-[75%] h-4 w-4 rounded-full bg-red-500 shadow-[0_0_20px_rgba(239,68,68,1)] animate-pulse" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-[60%] left-[30%] h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(139,92,246,1)] animate-pulse" style={{ animationDelay: '1.5s' }} />
+              
+              {/* Connecting lines */}
+              <svg className="absolute inset-0 w-full h-full opacity-30" preserveAspectRatio="none">
+                <path d="M 20% 30% Q 40% 10% 75% 25%" fill="none" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 4" className="animate-[dash_20s_linear_infinite]" />
+                <path d="M 60% 40% Q 45% 50% 30% 60%" fill="none" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4 4" className="animate-[dash_15s_linear_infinite_reverse]" />
+              </svg>
+
+              <div className="relative z-10 text-center">
+                <Globe className="h-12 w-12 text-slate-600 mx-auto mb-3 opacity-50" />
+                <p className="text-sm font-medium text-slate-400">Interactive Map Component</p>
+                <p className="text-xs text-slate-500 mt-1">Requires WebGL integration</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 mt-6">
+              {[
+                { country: "Russia", value: "31%", color: "#ef4444" },
+                { country: "China", value: "25%", color: "#f59e0b" },
+                { country: "North Korea", value: "14%", color: "#8b5cf6" },
+              ].map((item, i) => (
+                <div key={i} className="text-center p-3 rounded-xl bg-white/5 border border-white/5">
+                  <p className="text-lg font-bold" style={{ color: item.color }}>{item.value}</p>
+                  <p className="text-xs text-slate-400 mt-1">{item.country}</p>
                 </div>
               ))}
             </div>
           </Card>
         </motion.div>
       </div>
-
-      {/* Charts Row 2 */}
-      <div className="grid lg:grid-cols-2 gap-4">
-        {/* Monthly Trend */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <Card className="p-5">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h3 className="text-sm font-semibold text-white">Monthly Trends</h3>
-                <p className="text-xs text-[#555] mt-0.5">Phishing, malware & spam over time</p>
-              </div>
-            </div>
-            <MonthlyTrendChart data={monthlyTrendData} />
-          </Card>
-        </motion.div>
-
-        {/* Top Impersonated Brands */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45 }}
-        >
-          <Card className="p-5">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h3 className="text-sm font-semibold text-white">Top Impersonated Brands</h3>
-                <p className="text-xs text-[#555] mt-0.5">This month's targets</p>
-              </div>
-            </div>
-            <TopBrandsChart data={topImpersonatedBrands} />
-          </Card>
-        </motion.div>
-      </div>
-
-      {/* Recent Activity */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold">Recent Activity</CardTitle>
-              <Link href="/dashboard/history">
-                <Button variant="ghost" size="sm" className="h-7 text-xs text-[#666]">
-                  View All <ChevronRight className="ml-1 h-3 w-3" />
-                </Button>
-              </Link>
-            </div>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-0">
-              {recentScans.slice(0, 5).map((scan, i) => {
-                const threat = getThreatLevel(scan.threatScore);
-                return (
-                  <React.Fragment key={scan.id}>
-                    {i > 0 && <Separator />}
-                    <Link href="/dashboard/report">
-                      <motion.div
-                        whileHover={{ backgroundColor: "rgba(255,255,255,0.02)" }}
-                        className="flex items-center gap-4 py-3.5 px-1 -mx-1 rounded-lg cursor-pointer transition-colors"
-                      >
-                        <div
-                          className="h-8 w-8 shrink-0 rounded-lg flex items-center justify-center"
-                          style={{ backgroundColor: `${threat.color}15` }}
-                        >
-                          <Mail className="h-3.5 w-3.5" style={{ color: threat.color }} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-white truncate">{scan.subject}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-xs text-[#555] truncate">{scan.sender}</span>
-                            <span className="text-[#333]">·</span>
-                            <div className="flex items-center gap-1 text-xs text-[#555]">
-                              <Clock className="h-3 w-3" />
-                              {formatDate(scan.receivedAt)}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 shrink-0">
-                          <div className="text-right">
-                            <div className="text-sm font-bold" style={{ color: threat.color }}>
-                              {scan.threatScore}
-                            </div>
-                            <div className="text-[10px] text-[#555]">score</div>
-                          </div>
-                          <Badge
-                            style={{
-                              backgroundColor: threat.bg,
-                              color: threat.color,
-                              borderColor: `${threat.color}30`,
-                            }}
-                          >
-                            {threat.label}
-                          </Badge>
-                          <ArrowUpRight className="h-4 w-4 text-[#444]" />
-                        </div>
-                      </motion.div>
-                    </Link>
-                  </React.Fragment>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
     </div>
   );
 }

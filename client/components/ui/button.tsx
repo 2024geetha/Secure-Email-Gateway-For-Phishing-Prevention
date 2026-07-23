@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline" | "ghost" | "destructive" | "secondary" | "link";
@@ -12,38 +13,44 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "md", loading, children, disabled, ...props }, ref) => {
     const base =
-      "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10b981]/50 disabled:pointer-events-none disabled:opacity-40 cursor-pointer select-none";
+      "inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none relative overflow-hidden";
 
     const variants = {
       default:
-        "bg-[#10b981] text-white hover:bg-[#0d9e6e] active:scale-[0.98] shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_28px_rgba(16,185,129,0.35)]",
+        "bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] border border-white/10",
       outline:
         "border border-[rgba(255,255,255,0.12)] bg-transparent text-white hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)]",
-      ghost: "bg-transparent text-[#b3b3b3] hover:bg-[rgba(255,255,255,0.05)] hover:text-white",
+      ghost: "bg-transparent text-[#cbd5e1] hover:bg-[rgba(255,255,255,0.05)] hover:text-white",
       destructive:
-        "bg-[#ef4444] text-white hover:bg-[#dc2626] active:scale-[0.98]",
+        "bg-gradient-to-r from-[#ef4444] to-[#dc2626] text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] border border-white/10",
       secondary:
-        "bg-[#1a1a1a] text-white hover:bg-[#222] border border-[rgba(255,255,255,0.08)]",
-      link: "text-[#10b981] underline-offset-4 hover:underline p-0 h-auto",
+        "bg-[#1e293b] text-white hover:bg-[#334155] border border-[rgba(255,255,255,0.08)]",
+      link: "text-[#8b5cf6] underline-offset-4 hover:underline p-0 h-auto",
     };
 
     const sizes = {
-      sm: "h-8 px-3 text-xs rounded-md",
-      md: "h-9 px-4 text-sm rounded-lg",
-      lg: "h-11 px-6 text-sm rounded-lg",
-      icon: "h-9 w-9 rounded-lg",
+      sm: "h-9 px-4 text-xs rounded-xl",
+      md: "h-11 px-6 text-sm rounded-xl",
+      lg: "h-14 px-8 text-base rounded-2xl",
+      icon: "h-11 w-11 rounded-xl",
     };
 
     return (
-      <button
+      <motion.button
+        whileTap={{ scale: 0.98 }}
         ref={ref}
         className={cn(base, variants[variant], sizes[size], className)}
         disabled={disabled || loading}
         {...props}
       >
+        {/* Subtle inner glow for default variant */}
+        {variant === "default" && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        )}
+        
         {loading ? (
           <svg
-            className="animate-spin h-4 w-4"
+            className="animate-spin h-4 w-4 relative z-10"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -63,8 +70,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         ) : null}
-        {children}
-      </button>
+        <span className="relative z-10 flex items-center gap-2">{children}</span>
+      </motion.button>
     );
   }
 );
