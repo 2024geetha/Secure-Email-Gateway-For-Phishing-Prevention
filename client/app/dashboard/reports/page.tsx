@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Download,
@@ -14,6 +14,7 @@ import {
   AlertTriangle,
   CheckCircle2,
   ArrowUpRight,
+  ShieldAlert
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ import {
 } from "@/components/ui/table";
 import { recentScans } from "@/lib/mock-data";
 import { getThreatLevel, formatDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const ALL_LEVELS = ["All", "Critical", "High Risk", "Medium Risk", "Low Risk", "Clean"];
 
@@ -71,81 +73,91 @@ export default function ReportsPage() {
   };
 
   const SortIcon = ({ field }: { field: "threatScore" | "receivedAt" }) => {
-    if (sortField !== field) return <ChevronsUpDown className="h-3.5 w-3.5 ml-1 text-[#444]" />;
+    if (sortField !== field) return <ChevronsUpDown className="h-3.5 w-3.5 ml-1 text-slate-500" />;
     return sortDir === "asc" ? (
-      <ChevronUp className="h-3.5 w-3.5 ml-1 text-[#10b981]" />
+      <ChevronUp className="h-3.5 w-3.5 ml-1 text-purple-400" />
     ) : (
-      <ChevronDown className="h-3.5 w-3.5 ml-1 text-[#10b981]" />
+      <ChevronDown className="h-3.5 w-3.5 ml-1 text-purple-400" />
     );
   };
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Reports</h1>
-          <p className="text-sm text-[#666] mt-0.5">
+          <h1 className="text-3xl font-bold text-white tracking-tight">Reports</h1>
+          <p className="text-slate-400 mt-1">
             Complete scan history with threat scores and categories.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <FileJson className="mr-2 h-3.5 w-3.5" /> Export JSON
+        <div className="flex items-center gap-3">
+          <Button variant="outline" className="rounded-xl bg-white/5 border-white/10 hover:bg-white/10">
+            <FileJson className="mr-2 h-4 w-4" /> Export JSON
           </Button>
-          <Button variant="outline" size="sm">
-            <Download className="mr-2 h-3.5 w-3.5" /> Export PDF
+          <Button className="rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+            <Download className="mr-2 h-4 w-4" /> Export PDF
           </Button>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         {[
-          { label: "Total Scans", value: recentScans.length, color: "#10b981" },
-          { label: "Threats Found", value: recentScans.filter((s) => s.threatScore >= 60).length, color: "#ef4444" },
-          { label: "Clean Emails", value: recentScans.filter((s) => s.threatScore < 20).length, color: "#22c55e" },
+          { label: "Total Scans", value: recentScans.length, color: "#8b5cf6", icon: Search },
+          { label: "Threats Found", value: recentScans.filter((s) => s.threatScore >= 60).length, color: "#ef4444", icon: ShieldAlert },
+          { label: "Clean Emails", value: recentScans.filter((s) => s.threatScore < 20).length, color: "#22c55e", icon: CheckCircle2 },
         ].map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.08 }}
+            transition={{ delay: i * 0.1 }}
           >
-            <Card className="p-4 text-center">
-              <div className="text-2xl font-bold" style={{ color: item.color }}>
-                {item.value}
+            <Card className="p-6 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full opacity-10 pointer-events-none transition-opacity group-hover:opacity-20" style={{ backgroundColor: item.color }} />
+              <div className="flex items-center gap-4 relative z-10">
+                <div className="h-12 w-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: `${item.color}15`, border: `1px solid ${item.color}30` }}>
+                  <item.icon className="h-6 w-6" style={{ color: item.color }} />
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-white tracking-tight">{item.value}</div>
+                  <div className="text-sm font-medium text-slate-400">{item.label}</div>
+                </div>
               </div>
-              <div className="text-xs text-[#555] mt-0.5">{item.label}</div>
             </Card>
           </motion.div>
         ))}
       </div>
 
       {/* Filters */}
-      <Card className="p-4">
-        <div className="flex flex-col sm:flex-row gap-3">
+      <Card className="p-2 sm:p-4 bg-black/20 border-white/5 backdrop-blur-md">
+        <div className="flex flex-col lg:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#444]" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
             <Input
               placeholder="Search by subject or sender..."
-              className="pl-9"
+              className="pl-12 h-12 rounded-xl bg-white/5 border-white/10 text-base focus-visible:ring-purple-500/50"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-[#444] shrink-0" />
-            <div className="flex gap-1.5 flex-wrap">
+          <div className="flex items-center gap-3 overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 shrink-0">
+              <Filter className="h-4 w-4 text-slate-400" />
+              <span className="text-sm font-medium text-slate-300">Filter:</span>
+            </div>
+            <div className="flex gap-2">
               {ALL_LEVELS.map((level) => (
                 <button
                   key={level}
                   onClick={() => setFilter(level)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+                  className={cn(
+                    "px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap",
                     filter === level
-                      ? "bg-[rgba(16,185,129,0.15)] text-[#10b981] border border-[rgba(16,185,129,0.25)]"
-                      : "text-[#666] hover:text-white hover:bg-[rgba(255,255,255,0.05)] border border-transparent"
-                  }`}
+                      ? "bg-purple-500/20 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                      : "bg-white/5 text-slate-400 border border-transparent hover:bg-white/10 hover:text-white"
+                  )}
                 >
                   {level}
                 </button>
@@ -161,115 +173,138 @@ export default function ReportsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <Card>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-10">#</TableHead>
-                <TableHead>Email Subject</TableHead>
-                <TableHead>Sender</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>
-                  <button
-                    className="flex items-center hover:text-white transition-colors"
-                    onClick={() => toggleSort("threatScore")}
-                  >
-                    Score <SortIcon field="threatScore" />
-                  </button>
-                </TableHead>
-                <TableHead>Level</TableHead>
-                <TableHead>
-                  <button
-                    className="flex items-center hover:text-white transition-colors"
-                    onClick={() => toggleSort("receivedAt")}
-                  >
-                    Date <SortIcon field="receivedAt" />
-                  </button>
-                </TableHead>
-                <TableHead />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filtered.map((scan, i) => {
-                const threat = getThreatLevel(scan.threatScore);
-                return (
-                  <TableRow key={scan.id}>
-                    <TableCell className="text-[#555] text-xs">{i + 1}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <div
-                          className="h-6 w-6 rounded-md flex items-center justify-center shrink-0"
-                          style={{ backgroundColor: `${threat.color}12` }}
-                        >
-                          <Mail className="h-3 w-3" style={{ color: threat.color }} />
-                        </div>
-                        <span className="text-sm text-white font-medium truncate max-w-[200px]">
-                          {scan.subject}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-[#666] text-xs max-w-[150px] truncate">
-                      {scan.sender}
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-xs text-[#888]">{scan.category}</span>
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-sm font-bold" style={{ color: threat.color }}>
-                        {scan.threatScore}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge
-                        style={{
-                          backgroundColor: threat.bg,
-                          color: threat.color,
-                          borderColor: `${threat.color}30`,
-                        }}
-                        className="text-[10px] whitespace-nowrap"
+        <Card className="overflow-hidden border-white/10">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-black/40">
+                <TableRow className="border-white/5 hover:bg-transparent">
+                  <TableHead className="w-12 text-center text-slate-400">#</TableHead>
+                  <TableHead className="text-slate-400 font-medium">Email Subject</TableHead>
+                  <TableHead className="text-slate-400 font-medium">Sender</TableHead>
+                  <TableHead className="text-slate-400 font-medium">Category</TableHead>
+                  <TableHead>
+                    <button
+                      className="flex items-center text-slate-400 font-medium hover:text-white transition-colors group"
+                      onClick={() => toggleSort("threatScore")}
+                    >
+                      Score <SortIcon field="threatScore" />
+                    </button>
+                  </TableHead>
+                  <TableHead className="text-slate-400 font-medium">Level</TableHead>
+                  <TableHead>
+                    <button
+                      className="flex items-center text-slate-400 font-medium hover:text-white transition-colors group"
+                      onClick={() => toggleSort("receivedAt")}
+                    >
+                      Date <SortIcon field="receivedAt" />
+                    </button>
+                  </TableHead>
+                  <TableHead className="text-right text-slate-400 font-medium">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <AnimatePresence>
+                  {filtered.map((scan, i) => {
+                    const threat = getThreatLevel(scan.threatScore);
+                    return (
+                      <motion.tr
+                        key={scan.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2, delay: i * 0.03 }}
+                        className="border-white/5 hover:bg-white/[0.02] transition-colors group"
                       >
-                        {threat.label}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-xs text-[#555]">
-                      {formatDate(scan.receivedAt)}
-                    </TableCell>
-                    <TableCell>
-                      <Link href="/dashboard/report">
-                        <Button variant="ghost" size="icon" className="h-7 w-7">
-                          <ArrowUpRight className="h-3.5 w-3.5" />
-                        </Button>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                        <TableCell className="text-slate-500 text-sm text-center font-mono">{i + 1}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0 border"
+                              style={{ backgroundColor: `${threat.color}15`, borderColor: `${threat.color}30` }}
+                            >
+                              <Mail className="h-4 w-4" style={{ color: threat.color }} />
+                            </div>
+                            <span className="text-sm text-white font-medium truncate max-w-[250px]">
+                              {scan.subject}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-slate-400 text-sm max-w-[200px] truncate">
+                          {scan.sender}
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-sm text-slate-400">{scan.category}</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-base font-bold" style={{ color: threat.color }}>
+                            {scan.threatScore}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            style={{
+                              backgroundColor: threat.bg,
+                              color: threat.color,
+                              borderColor: `${threat.color}30`,
+                            }}
+                            className="whitespace-nowrap px-3 py-1"
+                          >
+                            {threat.label}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-sm text-slate-400">
+                          {formatDate(scan.receivedAt)}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Link href="/dashboard/report">
+                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10">
+                              <ArrowUpRight className="h-4.5 w-4.5 text-slate-300" />
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </motion.tr>
+                    );
+                  })}
+                </AnimatePresence>
+              </TableBody>
+            </Table>
+          </div>
 
           {filtered.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <Mail className="h-10 w-10 text-[#333] mb-3" />
-              <p className="text-sm text-[#555]">No results match your search</p>
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6">
+                <Search className="h-8 w-8 text-slate-500" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">No results found</h3>
+              <p className="text-slate-400 max-w-sm mx-auto">
+                We couldn't find any scans matching your current search and filter criteria.
+              </p>
+              <Button 
+                variant="outline" 
+                className="mt-6 rounded-xl"
+                onClick={() => { setSearch(""); setFilter("All"); }}
+              >
+                Clear Filters
+              </Button>
             </div>
           )}
 
           {/* Pagination */}
-          <div className="flex items-center justify-between px-4 py-3 border-t border-[rgba(255,255,255,0.06)]">
-            <p className="text-xs text-[#555]">
-              Showing {filtered.length} of {recentScans.length} results
+          <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-black/20">
+            <p className="text-sm text-slate-400">
+              Showing <span className="text-white font-medium">{filtered.length}</span> of <span className="text-white font-medium">{recentScans.length}</span> results
             </p>
-            <div className="flex items-center gap-1.5">
-              <Button variant="outline" size="sm" className="h-7 text-xs" disabled>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" className="rounded-xl border-white/10 hover:bg-white/10" disabled>
                 Previous
               </Button>
-              <Button variant="outline" size="sm" className="h-7 w-7 text-xs bg-[rgba(16,185,129,0.1)] border-[rgba(16,185,129,0.25)] text-[#10b981]">
+              <Button variant="outline" size="sm" className="rounded-xl w-9 bg-purple-500/20 border-purple-500/30 text-purple-300">
                 1
               </Button>
-              <Button variant="ghost" size="sm" className="h-7 w-7 text-xs text-[#555]">
+              <Button variant="ghost" size="sm" className="rounded-xl w-9 text-slate-400 hover:text-white hover:bg-white/10">
                 2
               </Button>
-              <Button variant="outline" size="sm" className="h-7 text-xs">
+              <Button variant="outline" size="sm" className="rounded-xl border-white/10 hover:bg-white/10">
                 Next
               </Button>
             </div>
