@@ -128,13 +128,13 @@ function Section({ children, className = "", id }: { children: React.ReactNode; 
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#050505] text-white">
+    <div className="min-h-screen bg-[#000000] text-white">
       {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-[rgba(255,255,255,0.06)] bg-[#050505]/90 backdrop-blur-md">
+      <nav className="fixed top-0 inset-x-0 z-50 border-b border-[rgba(168,85,247,0.15)] bg-[#000000]/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-lg bg-[rgba(16,185,129,0.15)] border border-[rgba(16,185,129,0.25)] flex items-center justify-center">
-              <Shield className="h-4 w-4 text-[#10b981]" />
+            <div className="h-7 w-7 rounded-lg bg-[rgba(168,85,247,0.15)] border border-[rgba(168,85,247,0.25)] flex items-center justify-center">
+              <Shield className="h-4 w-4 text-[#a855f7]" />
             </div>
             <span className="text-sm font-semibold">Sentinel AI</span>
           </Link>
@@ -160,7 +160,7 @@ export default function LandingPage() {
       <section className="pt-32 pb-20 px-6 relative overflow-hidden">
         {/* Ambient glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[rgba(16,185,129,0.04)] blur-3xl" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[rgba(168,85,247,0.04)] blur-3xl" />
           <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[rgba(99,102,241,0.03)] blur-3xl" />
         </div>
 
@@ -182,7 +182,7 @@ export default function LandingPage() {
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6"
           >
             AI-Powered{" "}
-            <span className="text-[#10b981]">Email Security</span>{" "}
+            <span className="text-[#a855f7]">Email Security</span>{" "}
             Copilot
           </motion.h1>
 
@@ -223,16 +223,16 @@ export default function LandingPage() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-5xl mx-auto mt-16 relative"
         >
-          <div className="rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[#0b0b0b] overflow-hidden shadow-2xl">
+          <div className="rounded-2xl border border-[rgba(168,85,247,0.25)] bg-[#0a0014] overflow-hidden shadow-2xl">
             {/* Fake browser bar */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(255,255,255,0.06)]">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(168,85,247,0.15)]">
               <div className="flex gap-1.5">
                 <div className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/60" />
                 <div className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]/60" />
                 <div className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/60" />
               </div>
               <div className="flex-1 mx-4">
-                <div className="h-5 rounded-md bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] flex items-center px-2">
+                <div className="h-5 rounded-md bg-[rgba(255,255,255,0.04)] border border-[rgba(168,85,247,0.15)] flex items-center px-2">
                   <span className="text-[10px] text-[#555]">sentinel.ai/dashboard</span>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function LandingPage() {
             {/* Dashboard preview content */}
             <div className="grid grid-cols-4 gap-3 p-4">
               {[
-                { label: "Emails Scanned", value: "48,291", color: "#10b981", icon: Mail },
+                { label: "Emails Scanned", value: "48,291", color: "#a855f7", icon: Mail },
                 { label: "Threats Blocked", value: "3,847", color: "#ef4444", icon: AlertTriangle },
                 { label: "High Risk", value: "612", color: "#f59e0b", icon: Shield },
                 { label: "Avg Score", value: "23/100", color: "#6366f1", icon: TrendingUp },
@@ -253,7 +253,7 @@ export default function LandingPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 + i * 0.08 }}
-                    className="rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#111] p-3"
+                    className="rounded-lg border border-[rgba(168,85,247,0.15)] bg-[#0a0014] p-3"
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[10px] text-[#555]">{card.label}</span>
@@ -266,7 +266,7 @@ export default function LandingPage() {
             </div>
 
             <div className="px-4 pb-4">
-              <div className="rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#111] p-3">
+              <div className="rounded-lg border border-[rgba(168,85,247,0.15)] bg-[#0a0014] p-3">
                 <p className="text-[10px] text-[#555] mb-3">Weekly Scans</p>
                 <div className="flex items-end gap-1 h-16">
                   {[40, 55, 72, 60, 85, 45, 38].map((h, i) => (
@@ -275,7 +275,7 @@ export default function LandingPage() {
                       initial={{ height: 0 }}
                       animate={{ height: `${h}%` }}
                       transition={{ duration: 0.5, delay: 0.8 + i * 0.06 }}
-                      className="flex-1 rounded-sm bg-[rgba(16,185,129,0.3)]"
+                      className="flex-1 rounded-sm bg-[rgba(168,85,247,0.3)]"
                     />
                   ))}
                 </div>
@@ -286,7 +286,7 @@ export default function LandingPage() {
       </section>
 
       {/* Stats */}
-      <Section className="py-12 border-y border-[rgba(255,255,255,0.06)]">
+      <Section className="py-12 border-y border-[rgba(168,85,247,0.15)]">
         <div className="max-w-4xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s, i) => (
             <motion.div
@@ -297,7 +297,7 @@ export default function LandingPage() {
               transition={{ delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="text-3xl font-bold text-[#10b981] mb-1">
+              <div className="text-3xl font-bold text-[#a855f7] mb-1">
                 <AnimatedCounter value={s.value} />
               </div>
               <div className="text-sm text-[#666]">{s.label}</div>
@@ -331,8 +331,8 @@ export default function LandingPage() {
                 >
                   <Card className="h-full p-5 hover:border-[rgba(255,255,255,0.15)] transition-colors">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="h-9 w-9 rounded-lg bg-[rgba(16,185,129,0.1)] border border-[rgba(16,185,129,0.2)] flex items-center justify-center">
-                        <Icon className="h-4.5 w-4.5 text-[#10b981]" />
+                      <div className="h-9 w-9 rounded-lg bg-[rgba(168,85,247,0.1)] border border-[rgba(168,85,247,0.2)] flex items-center justify-center">
+                        <Icon className="h-4.5 w-4.5 text-[#a855f7]" />
                       </div>
                       <Badge variant="secondary" className="text-[10px]">{f.tag}</Badge>
                     </div>
@@ -365,15 +365,15 @@ export default function LandingPage() {
                 transition={{ delay: i * 0.12 }}
                 className="flex gap-6 items-start"
               >
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl border border-[rgba(16,185,129,0.2)] bg-[rgba(16,185,129,0.06)] flex items-center justify-center">
-                  <span className="text-lg font-bold text-[#10b981]">{step.n}</span>
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl border border-[rgba(168,85,247,0.2)] bg-[rgba(168,85,247,0.06)] flex items-center justify-center">
+                  <span className="text-lg font-bold text-[#a855f7]">{step.n}</span>
                 </div>
                 <div className="flex-1 pt-1">
                   <h3 className="text-base font-semibold mb-1">{step.title}</h3>
                   <p className="text-sm text-[#666]">{step.desc}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="absolute left-7 mt-14 h-4 w-px bg-[rgba(16,185,129,0.2)]" />
+                  <div className="absolute left-7 mt-14 h-4 w-px bg-[rgba(168,85,247,0.2)]" />
                 )}
               </motion.div>
             ))}
@@ -402,7 +402,7 @@ export default function LandingPage() {
                   "Malware family classification",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-2.5 text-sm text-[#b3b3b3]">
-                    <CheckCircle2 className="h-4 w-4 text-[#10b981] shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-[#a855f7] shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -420,7 +420,7 @@ export default function LandingPage() {
               {[
                 { label: "Active Threat Domains", value: "12,847", color: "#ef4444", change: "+247 today" },
                 { label: "Malware Families", value: "384", color: "#f59e0b", change: "+12 this week" },
-                { label: "Targeted Brands", value: "527", color: "#10b981", change: "500+ covered" },
+                { label: "Targeted Brands", value: "527", color: "#a855f7", change: "500+ covered" },
                 { label: "Countries Tracked", value: "191", color: "#6366f1", change: "Global coverage" },
               ].map((item, i) => (
                 <motion.div
@@ -429,7 +429,7 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0b0b0b] p-4"
+                  className="rounded-xl border border-[rgba(168,85,247,0.2)] bg-[#0a0014] p-4"
                 >
                   <p className="text-[11px] text-[#555] mb-2">{item.label}</p>
                   <p className="text-2xl font-bold mb-1" style={{ color: item.color }}>
@@ -502,12 +502,12 @@ export default function LandingPage() {
       </Section>
 
       {/* Footer */}
-      <footer className="border-t border-[rgba(255,255,255,0.06)] py-10 px-6">
+      <footer className="border-t border-[rgba(168,85,247,0.15)] py-10 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="h-6 w-6 rounded-md bg-[rgba(16,185,129,0.15)] border border-[rgba(16,185,129,0.25)] flex items-center justify-center">
-                <Shield className="h-3.5 w-3.5 text-[#10b981]" />
+              <div className="h-6 w-6 rounded-md bg-[rgba(168,85,247,0.15)] border border-[rgba(168,85,247,0.25)] flex items-center justify-center">
+                <Shield className="h-3.5 w-3.5 text-[#a855f7]" />
               </div>
               <span className="text-sm font-semibold text-white">Sentinel AI</span>
             </div>

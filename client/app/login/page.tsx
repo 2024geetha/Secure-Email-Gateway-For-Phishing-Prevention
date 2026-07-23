@@ -32,7 +32,7 @@ function FloatingParticles() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-[#10b981]"
+          className="absolute rounded-full bg-[#a855f7]"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -62,7 +62,7 @@ function FloatingParticles() {
         }}
       />
       {/* Center glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[rgba(16,185,129,0.04)] blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[rgba(168,85,247,0.04)] blur-3xl" />
     </div>
   );
 }
@@ -85,7 +85,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center relative p-4">
+    <div className="min-h-screen bg-[#000000] flex items-center justify-center relative p-4">
       <FloatingParticles />
 
       <motion.div
@@ -96,15 +96,15 @@ export default function LoginPage() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(16,185,129,0.12)] border border-[rgba(16,185,129,0.25)] mb-4">
-            <Shield className="h-6 w-6 text-[#10b981]" />
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(168,85,247,0.12)] border border-[rgba(168,85,247,0.25)] mb-4">
+            <Shield className="h-6 w-6 text-[#a855f7]" />
           </div>
           <h1 className="text-2xl font-bold text-white">Sentinel AI</h1>
           <p className="text-sm text-[#666] mt-1">AI Email Security Copilot</p>
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0b0b0b] p-6">
+        <div className="rounded-2xl border border-[rgba(168,85,247,0.2)] bg-[#0a0014] p-6">
           <h2 className="text-base font-semibold text-white mb-5">Sign in to your account</h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -130,7 +130,7 @@ export default function LoginPage() {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-medium text-[#888]">Password</label>
-                <a href="#" className="text-xs text-[#10b981] hover:underline">
+                <a href="#" className="text-xs text-[#a855f7] hover:underline">
                   Forgot password?
                 </a>
               </div>
@@ -167,7 +167,7 @@ export default function LoginPage() {
               <div className="w-full border-t border-[rgba(255,255,255,0.07)]" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="bg-[#0b0b0b] px-3 text-[#555]">or continue with</span>
+              <span className="bg-[#0a0014] px-3 text-[#555]">or continue with</span>
             </div>
           </div>
 
@@ -201,7 +201,7 @@ export default function LoginPage() {
 
           <p className="text-center text-xs text-[#555] mt-5">
             Don&apos;t have an account?{" "}
-            <a href="#" className="text-[#10b981] hover:underline">
+            <a href="#" className="text-[#a855f7] hover:underline">
               Sign up free
             </a>
           </p>
@@ -211,7 +211,7 @@ export default function LoginPage() {
         <div className="flex items-center justify-center gap-4 mt-6">
           {["SOC 2 Type II", "GDPR Compliant", "256-bit TLS"].map((badge) => (
             <div key={badge} className="flex items-center gap-1 text-[10px] text-[#444]">
-              <Zap className="h-2.5 w-2.5 text-[#10b981]" />
+              <Zap className="h-2.5 w-2.5 text-[#a855f7]" />
               {badge}
             </div>
           ))}
