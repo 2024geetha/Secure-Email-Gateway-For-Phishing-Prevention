@@ -110,7 +110,7 @@ export default function DashboardPage() {
             System Operational
           </div>
           <h1 className="text-3xl font-bold text-white tracking-tight">Security Overview</h1>
-          <p className="text-slate-400 mt-1">Real-time threat intelligence and email analysis.</p>
+          <p className="text-purple-200 mt-1">Real-time threat intelligence and email analysis.</p>
         </motion.div>
         
         <motion.div
@@ -120,7 +120,7 @@ export default function DashboardPage() {
           className="flex items-center gap-3"
         >
           <Button variant="outline" className="hidden sm:flex rounded-xl">
-            <Clock className="mr-2 h-4 w-4 text-slate-400" /> Last 7 Days
+            <Clock className="mr-2 h-4 w-4 text-purple-200" /> Last 7 Days
           </Button>
           <Link href="/dashboard/analyze">
             <Button className="rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]">
@@ -155,7 +155,7 @@ export default function DashboardPage() {
                     <Icon className="h-5 w-5" style={{ color: card.color }} />
                   </div>
                   <div
-                    className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-white/5 border border-white/10"
+                    className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-purple-500/5 border border-purple-500/20"
                     style={{ color: trendColor }}
                   >
                     {positive ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
@@ -165,9 +165,9 @@ export default function DashboardPage() {
                 <div>
                   <div className="text-3xl font-bold text-white tracking-tight mb-1">
                     <AnimatedNumber value={card.value} />
-                    {card.suffix && <span className="text-lg font-normal text-slate-500">{card.suffix}</span>}
+                    {card.suffix && <span className="text-lg font-normal text-purple-300/70">{card.suffix}</span>}
                   </div>
-                  <p className="text-sm text-slate-400 font-medium">{card.label}</p>
+                  <p className="text-sm text-purple-200 font-medium">{card.label}</p>
                 </div>
               </Card>
             </motion.div>
@@ -187,9 +187,9 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-lg font-semibold text-white">Threat Activity</h3>
-                <p className="text-sm text-slate-400">Scans vs detections over time</p>
+                <p className="text-sm text-purple-200">Scans vs detections over time</p>
               </div>
-              <div className="flex items-center gap-4 text-sm text-slate-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+              <div className="flex items-center gap-4 text-sm text-purple-200 bg-purple-500/5 px-3 py-1.5 rounded-full border border-purple-500/20">
                 <div className="flex items-center gap-2">
                   <div className="h-2.5 w-2.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(139,92,246,0.8)]" />
                   Scans
@@ -213,7 +213,7 @@ export default function DashboardPage() {
           transition={{ delay: 0.5 }}
           className="flex flex-col gap-6"
         >
-          <Card className="p-6 flex-1 bg-gradient-to-br from-[#111827] to-[#1e1b4b] border-purple-500/20 relative overflow-hidden">
+          <Card className="p-6 flex-1 bg-gradient-to-br from-[#0a0014] to-[#1e1b4b] border-purple-500/20 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full pointer-events-none" />
             <div className="flex items-center gap-3 mb-4">
               <div className="h-10 w-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
@@ -225,12 +225,12 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-black/20 border border-white/5 backdrop-blur-sm">
-                <p className="text-sm text-slate-300 leading-relaxed">
+              <div className="p-4 rounded-xl bg-black/20 border border-purple-500/10 backdrop-blur-sm">
+                <p className="text-sm text-purple-100 leading-relaxed">
                   "We've detected a <span className="text-red-400 font-medium">32% increase</span> in credential harvesting attempts targeting your finance department over the last 48 hours. I recommend updating your DMARC policies."
                 </p>
               </div>
-              <Button className="w-full rounded-xl bg-white/10 hover:bg-white/20 text-white border-none shadow-none">
+              <Button className="w-full rounded-xl bg-purple-500/10 hover:bg-white/20 text-white border-none shadow-none">
                 View Detailed Analysis
               </Button>
             </div>
@@ -253,13 +253,13 @@ export default function DashboardPage() {
           transition={{ delay: 0.6 }}
         >
           <Card className="flex flex-col h-full">
-            <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-white/5">
+            <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-purple-500/10">
               <div>
                 <CardTitle>Recent Detections</CardTitle>
-                <p className="text-sm text-slate-400 mt-1">Latest high-risk emails isolated</p>
+                <p className="text-sm text-purple-200 mt-1">Latest high-risk emails isolated</p>
               </div>
               <Link href="/dashboard/history">
-                <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white rounded-lg">
+                <Button variant="ghost" size="sm" className="text-purple-200 hover:text-white rounded-lg">
                   View All <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
               </Link>
@@ -280,9 +280,9 @@ export default function DashboardPage() {
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-white truncate">{scan.subject}</p>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs text-slate-400 truncate">{scan.sender}</span>
+                            <span className="text-xs text-purple-200 truncate">{scan.sender}</span>
                             <span className="text-slate-600">•</span>
-                            <span className="text-xs text-slate-500 flex items-center gap-1">
+                            <span className="text-xs text-purple-300/70 flex items-center gap-1">
                               <Clock className="h-3 w-3" /> {formatDate(scan.receivedAt)}
                             </span>
                           </div>
@@ -317,14 +317,14 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-lg font-semibold text-white">Global Threat Origins</h3>
-                <p className="text-sm text-slate-400">Live attack mapping</p>
+                <p className="text-sm text-purple-200">Live attack mapping</p>
               </div>
               <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20">
                 <Globe className="mr-1.5 h-3 w-3" /> Live
               </Badge>
             </div>
             
-            <div className="flex-1 rounded-2xl bg-black/20 border border-white/5 relative overflow-hidden flex items-center justify-center min-h-[300px]">
+            <div className="flex-1 rounded-2xl bg-black/20 border border-purple-500/10 relative overflow-hidden flex items-center justify-center min-h-[300px]">
               {/* Abstract map visualization */}
               <div className="absolute inset-0 opacity-20" style={{
                 backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 60%)'
@@ -344,8 +344,8 @@ export default function DashboardPage() {
 
               <div className="relative z-10 text-center">
                 <Globe className="h-12 w-12 text-slate-600 mx-auto mb-3 opacity-50" />
-                <p className="text-sm font-medium text-slate-400">Interactive Map Component</p>
-                <p className="text-xs text-slate-500 mt-1">Requires WebGL integration</p>
+                <p className="text-sm font-medium text-purple-200">Interactive Map Component</p>
+                <p className="text-xs text-purple-300/70 mt-1">Requires WebGL integration</p>
               </div>
             </div>
             
@@ -355,9 +355,9 @@ export default function DashboardPage() {
                 { country: "China", value: "25%", color: "#f59e0b" },
                 { country: "North Korea", value: "14%", color: "#8b5cf6" },
               ].map((item, i) => (
-                <div key={i} className="text-center p-3 rounded-xl bg-white/5 border border-white/5">
+                <div key={i} className="text-center p-3 rounded-xl bg-purple-500/5 border border-purple-500/10">
                   <p className="text-lg font-bold" style={{ color: item.color }}>{item.value}</p>
-                  <p className="text-xs text-slate-400 mt-1">{item.country}</p>
+                  <p className="text-xs text-purple-200 mt-1">{item.country}</p>
                 </div>
               ))}
             </div>

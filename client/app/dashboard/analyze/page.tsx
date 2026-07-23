@@ -83,7 +83,7 @@ export default function AnalyzePage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
             Analyze Email Threat
           </h1>
-          <p className="text-slate-400 text-base">
+          <p className="text-purple-200 text-base">
             Upload an .eml or .msg file, or paste raw headers for instant AI-powered threat analysis.
           </p>
         </motion.div>
@@ -96,10 +96,10 @@ export default function AnalyzePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <Card className="p-1 sm:p-2 bg-gradient-to-b from-[#111827] to-[#081226] border-white/10 shadow-2xl">
+          <Card className="p-1 sm:p-2 bg-gradient-to-b from-[#0a0014] to-[#090014] border-purple-500/20 shadow-2xl">
             <Tabs defaultValue="upload" className="w-full">
               <div className="px-4 pt-4 pb-2">
-                <TabsList className="w-full grid grid-cols-2 bg-black/40 border border-white/5 p-1 rounded-xl">
+                <TabsList className="w-full grid grid-cols-2 bg-black/40 border border-purple-500/10 p-1 rounded-xl">
                   <TabsTrigger value="upload" className="rounded-lg data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-300 transition-all">
                     <Upload className="mr-2 h-4 w-4" /> File Upload
                   </TabsTrigger>
@@ -119,7 +119,7 @@ export default function AnalyzePage() {
                       "relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 sm:p-20 text-center cursor-pointer transition-all duration-300 overflow-hidden",
                       isDragActive
                         ? "border-purple-500 bg-purple-500/10 shadow-[0_0_40px_rgba(139,92,246,0.2)]"
-                        : "border-white/10 hover:border-purple-500/50 hover:bg-white/[0.02]",
+                        : "border-purple-500/20 hover:border-purple-500/50 hover:bg-white/[0.02]",
                       uploadedFile && "border-purple-500/30 bg-gradient-to-b from-purple-500/5 to-transparent cursor-default"
                     )}
                   >
@@ -149,7 +149,7 @@ export default function AnalyzePage() {
                           
                           <div className="w-full">
                             <p className="text-base font-semibold text-white truncate px-4">{uploadedFile.name}</p>
-                            <p className="text-sm text-slate-400 mt-1">
+                            <p className="text-sm text-purple-200 mt-1">
                               {(uploadedFile.size / 1024).toFixed(1)} KB
                             </p>
                           </div>
@@ -177,8 +177,8 @@ export default function AnalyzePage() {
                         >
                           <div className="relative group">
                             <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
-                              <Upload className={cn("h-8 w-8 transition-colors duration-300", isDragActive ? "text-purple-400" : "text-slate-400 group-hover:text-purple-400")} />
+                            <div className="h-20 w-20 rounded-full bg-purple-500/5 border border-purple-500/20 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                              <Upload className={cn("h-8 w-8 transition-colors duration-300", isDragActive ? "text-purple-400" : "text-purple-200 group-hover:text-purple-400")} />
                             </div>
                           </div>
                           
@@ -186,15 +186,15 @@ export default function AnalyzePage() {
                             <p className="text-xl font-semibold text-white mb-2">
                               {isDragActive ? "Drop to analyze" : "Drag & drop email file"}
                             </p>
-                            <p className="text-sm text-slate-400 max-w-[260px] mx-auto leading-relaxed">
+                            <p className="text-sm text-purple-200 max-w-[260px] mx-auto leading-relaxed">
                               Upload a suspicious email to instantly scan for phishing, malware, and impersonation.
                             </p>
                           </div>
                           
                           <div className="flex items-center gap-3 mt-2">
-                            <Badge variant="outline" className="bg-white/5 text-slate-300 border-white/10">.eml</Badge>
-                            <Badge variant="outline" className="bg-white/5 text-slate-300 border-white/10">.msg</Badge>
-                            <span className="text-xs text-slate-500">Max 25MB</span>
+                            <Badge variant="outline" className="bg-purple-500/5 text-purple-100 border-purple-500/20">.eml</Badge>
+                            <Badge variant="outline" className="bg-purple-500/5 text-purple-100 border-purple-500/20">.msg</Badge>
+                            <span className="text-xs text-purple-300/70">Max 25MB</span>
                           </div>
                           
                           <Button variant="secondary" className="mt-4 rounded-xl pointer-events-none">
@@ -207,18 +207,18 @@ export default function AnalyzePage() {
                 </TabsContent>
 
                 <TabsContent value="paste" className="mt-0 outline-none">
-                  <div className="relative rounded-2xl overflow-hidden border border-white/10 focus-within:border-blue-500/50 focus-within:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
-                    <div className="absolute top-0 inset-x-0 h-10 bg-black/40 border-b border-white/5 flex items-center px-4 z-10">
+                  <div className="relative rounded-2xl overflow-hidden border border-purple-500/20 focus-within:border-blue-500/50 focus-within:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
+                    <div className="absolute top-0 inset-x-0 h-10 bg-black/40 border-b border-purple-500/10 flex items-center px-4 z-10">
                       <div className="flex gap-1.5">
                         <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
                         <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/50" />
                         <div className="h-2.5 w-2.5 rounded-full bg-green-500/50" />
                       </div>
-                      <span className="ml-4 text-xs font-mono text-slate-500">raw-email-headers.txt</span>
+                      <span className="ml-4 text-xs font-mono text-purple-300/70">raw-email-headers.txt</span>
                     </div>
                     <Textarea
                       placeholder={`Paste raw email headers and body here...\n\nFrom: security@micros0ft-verify.com\nTo: user@company.com\nSubject: Urgent: Verify Your Microsoft Account\nDate: Thu, 23 Jul 2026 08:34:00 +0000\n...\n`}
-                      className="min-h-[360px] sm:min-h-[420px] font-mono text-xs sm:text-sm bg-[#0a0f1c] border-none pt-14 pb-4 px-4 sm:px-6 resize-none focus-visible:ring-0 text-slate-300 placeholder:text-slate-600 leading-relaxed"
+                      className="min-h-[360px] sm:min-h-[420px] font-mono text-xs sm:text-sm bg-[#0a0f1c] border-none pt-14 pb-4 px-4 sm:px-6 resize-none focus-visible:ring-0 text-purple-100 placeholder:text-slate-600 leading-relaxed"
                       value={rawEmail}
                       onChange={(e) => setRawEmail(e.target.value)}
                     />
@@ -255,7 +255,7 @@ export default function AnalyzePage() {
                             </span>
                           </div>
 
-                          <div className="h-2 rounded-full bg-black/40 overflow-hidden mb-6 border border-white/5">
+                          <div className="h-2 rounded-full bg-black/40 overflow-hidden mb-6 border border-purple-500/10">
                             <motion.div
                               animate={{ width: `${progress}%` }}
                               transition={{ duration: 0.4, ease: "easeOut" }}
@@ -275,11 +275,11 @@ export default function AnalyzePage() {
                                 ) : progress > (i - 1) * 20 ? (
                                   <div className="h-5 w-5 rounded-full border-2 border-purple-500 border-t-transparent animate-spin shrink-0" />
                                 ) : (
-                                  <div className="h-5 w-5 rounded-full border border-white/10 shrink-0" />
+                                  <div className="h-5 w-5 rounded-full border border-purple-500/20 shrink-0" />
                                 )}
                                 <span className={cn(
                                   "text-sm transition-colors duration-300",
-                                  step.done ? "text-slate-300" : progress > (i - 1) * 20 ? "text-white font-medium" : "text-slate-500"
+                                  step.done ? "text-purple-100" : progress > (i - 1) * 20 ? "text-white font-medium" : "text-purple-300/70"
                                 )}>
                                   {step.label}
                                 </span>
@@ -293,8 +293,8 @@ export default function AnalyzePage() {
                 </AnimatePresence>
 
                 {/* Action Bar */}
-                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/10">
-                  <div className="flex items-center gap-2 text-sm text-slate-400">
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-purple-500/20">
+                  <div className="flex items-center gap-2 text-sm text-purple-200">
                     <ShieldAlert className="h-4 w-4 text-purple-400" />
                     Powered by Sentinel AI Engine
                   </div>
@@ -322,21 +322,21 @@ export default function AnalyzePage() {
           className="space-y-6"
         >
           {/* Quick Actions */}
-          <Card className="p-5 bg-gradient-to-br from-[#111827] to-[#1e1b4b]/50 border-purple-500/20">
+          <Card className="p-5 bg-gradient-to-br from-[#0a0014] to-[#1e1b4b]/50 border-purple-500/20">
             <h3 className="text-sm font-semibold text-white mb-4">Quick Actions</h3>
             <div className="space-y-2">
-              <Button variant="secondary" className="w-full justify-start rounded-xl bg-white/5 hover:bg-white/10 border-white/5">
+              <Button variant="secondary" className="w-full justify-start rounded-xl bg-purple-500/5 hover:bg-purple-500/10 border-purple-500/10">
                 <FileText className="mr-3 h-4 w-4 text-purple-400" /> View Sample Report
               </Button>
-              <Button variant="secondary" className="w-full justify-start rounded-xl bg-white/5 hover:bg-white/10 border-white/5">
+              <Button variant="secondary" className="w-full justify-start rounded-xl bg-purple-500/5 hover:bg-purple-500/10 border-purple-500/10">
                 <Globe className="mr-3 h-4 w-4 text-blue-400" /> Check Domain Rep
               </Button>
             </div>
           </Card>
 
           {/* Recent Uploads */}
-          <Card className="p-0 overflow-hidden border-white/10">
-            <div className="p-5 border-b border-white/5 flex items-center justify-between bg-black/20">
+          <Card className="p-0 overflow-hidden border-purple-500/20">
+            <div className="p-5 border-b border-purple-500/10 flex items-center justify-between bg-black/20">
               <h3 className="text-sm font-semibold text-white">Recent Scans</h3>
               <Link href="/dashboard/history" className="text-xs text-purple-400 hover:text-purple-300 flex items-center">
                 View All <ArrowRight className="ml-1 h-3 w-3" />
@@ -357,7 +357,7 @@ export default function AnalyzePage() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-white truncate mb-1">{scan.subject}</p>
                         <div className="flex items-center justify-between">
-                          <span className="text-xs text-slate-500 flex items-center gap-1">
+                          <span className="text-xs text-purple-300/70 flex items-center gap-1">
                             <Clock className="h-3 w-3" /> {formatDate(scan.receivedAt).split(',')[0]}
                           </span>
                           <span className="text-xs font-bold" style={{ color: threat.color }}>
