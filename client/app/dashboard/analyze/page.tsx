@@ -14,6 +14,9 @@ import {
   File,
   X,
   ChevronRight,
+  ShieldAlert,
+  Search,
+  ArrowRight
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -57,239 +60,319 @@ export default function AnalyzePage() {
   };
 
   const analysisSteps = [
-    { label: "Parsing headers", done: progress >= 15 },
-    { label: "Extracting URLs", done: progress >= 35 },
-    { label: "Scanning attachments", done: progress >= 55 },
-    { label: "AI analysis", done: progress >= 72 },
-    { label: "Generating report", done: progress >= 88 },
-    { label: "Complete", done: progress >= 100 },
+    { label: "Parsing headers & metadata", done: progress >= 15 },
+    { label: "Extracting & resolving URLs", done: progress >= 35 },
+    { label: "Scanning attachments for malware", done: progress >= 55 },
+    { label: "Running AI behavioral analysis", done: progress >= 72 },
+    { label: "Generating threat score & report", done: progress >= 88 },
+    { label: "Analysis complete", done: progress >= 100 },
   ];
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="max-w-5xl mx-auto space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white">Analyze Email</h1>
-        <p className="text-sm text-[#666] mt-0.5">
-          Upload an .eml or .msg file, or paste raw email content for instant threat analysis.
-        </p>
+      <div className="text-center max-w-2xl mx-auto mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 mb-6 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
+            <ShieldAlert className="h-8 w-8 text-purple-400" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
+            Analyze Email Threat
+          </h1>
+          <p className="text-slate-400 text-base">
+            Upload an .eml or .msg file, or paste raw headers for instant AI-powered threat analysis.
+          </p>
+        </motion.div>
       </div>
 
-      {/* Upload card */}
-      <Card>
-        <CardContent className="p-6">
-          <Tabs defaultValue="upload">
-            <TabsList className="mb-6">
-              <TabsTrigger value="upload">
-                <Upload className="mr-2 h-3.5 w-3.5" /> Upload File
-              </TabsTrigger>
-              <TabsTrigger value="paste">
-                <FileText className="mr-2 h-3.5 w-3.5" /> Paste Raw Email
-              </TabsTrigger>
-            </TabsList>
+      <div className="grid lg:grid-cols-[1fr_340px] gap-8">
+        {/* Main Upload Area */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <Card className="p-1 sm:p-2 bg-gradient-to-b from-[#111827] to-[#081226] border-white/10 shadow-2xl">
+            <Tabs defaultValue="upload" className="w-full">
+              <div className="px-4 pt-4 pb-2">
+                <TabsList className="w-full grid grid-cols-2 bg-black/40 border border-white/5 p-1 rounded-xl">
+                  <TabsTrigger value="upload" className="rounded-lg data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-300 transition-all">
+                    <Upload className="mr-2 h-4 w-4" /> File Upload
+                  </TabsTrigger>
+                  <TabsTrigger value="paste" className="rounded-lg data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-300 transition-all">
+                    <FileText className="mr-2 h-4 w-4" /> Paste Raw
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
-            <TabsContent value="upload">
-              <div
-                {...(getRootProps() as React.HTMLAttributes<HTMLDivElement>)}
-                className={cn(
-                  "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-12 text-center cursor-pointer transition-all duration-200",
-                  isDragActive
-                    ? "border-[#10b981] bg-[rgba(16,185,129,0.05)]"
-                    : "border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.02)] hover:border-[rgba(16,185,129,0.3)]",
-                  uploadedFile && "border-[rgba(16,185,129,0.3)] bg-[rgba(16,185,129,0.04)]"
-                )}
-              >
-                <input {...getInputProps()} />
+              <div className="p-4 sm:p-6">
+                <TabsContent value="upload" className="mt-0 outline-none">
+                  <motion.div
+                    {...(getRootProps() as React.HTMLAttributes<HTMLDivElement>)}
+                    whileHover={{ scale: uploadedFile ? 1 : 1.01 }}
+                    whileTap={{ scale: uploadedFile ? 1 : 0.99 }}
+                    className={cn(
+                      "relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 sm:p-20 text-center cursor-pointer transition-all duration-300 overflow-hidden",
+                      isDragActive
+                        ? "border-purple-500 bg-purple-500/10 shadow-[0_0_40px_rgba(139,92,246,0.2)]"
+                        : "border-white/10 hover:border-purple-500/50 hover:bg-white/[0.02]",
+                      uploadedFile && "border-purple-500/30 bg-gradient-to-b from-purple-500/5 to-transparent cursor-default"
+                    )}
+                  >
+                    <input {...getInputProps()} />
 
-                <AnimatePresence mode="wait">
-                  {uploadedFile ? (
+                    {/* Background glows */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-purple-500/5 blur-3xl pointer-events-none" />
+
+                    <AnimatePresence mode="wait">
+                      {uploadedFile ? (
+                        <motion.div
+                          key="file"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          className="flex flex-col items-center gap-4 relative z-10 w-full max-w-xs"
+                        >
+                          <div className="relative">
+                            <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
+                            <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center relative z-10">
+                              <File className="h-10 w-10 text-purple-400" />
+                            </div>
+                            <div className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center z-20 backdrop-blur-md">
+                              <CheckCircle2 className="h-4 w-4 text-green-400" />
+                            </div>
+                          </div>
+                          
+                          <div className="w-full">
+                            <p className="text-base font-semibold text-white truncate px-4">{uploadedFile.name}</p>
+                            <p className="text-sm text-slate-400 mt-1">
+                              {(uploadedFile.size / 1024).toFixed(1)} KB
+                            </p>
+                          </div>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setUploadedFile(null);
+                            }}
+                            className="mt-2 rounded-xl hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/30 transition-colors"
+                          >
+                            <X className="mr-2 h-4 w-4" /> Remove File
+                          </Button>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="empty"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="flex flex-col items-center gap-5 relative z-10"
+                        >
+                          <div className="relative group">
+                            <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                              <Upload className={cn("h-8 w-8 transition-colors duration-300", isDragActive ? "text-purple-400" : "text-slate-400 group-hover:text-purple-400")} />
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <p className="text-xl font-semibold text-white mb-2">
+                              {isDragActive ? "Drop to analyze" : "Drag & drop email file"}
+                            </p>
+                            <p className="text-sm text-slate-400 max-w-[260px] mx-auto leading-relaxed">
+                              Upload a suspicious email to instantly scan for phishing, malware, and impersonation.
+                            </p>
+                          </div>
+                          
+                          <div className="flex items-center gap-3 mt-2">
+                            <Badge variant="outline" className="bg-white/5 text-slate-300 border-white/10">.eml</Badge>
+                            <Badge variant="outline" className="bg-white/5 text-slate-300 border-white/10">.msg</Badge>
+                            <span className="text-xs text-slate-500">Max 25MB</span>
+                          </div>
+                          
+                          <Button variant="secondary" className="mt-4 rounded-xl pointer-events-none">
+                            Browse Files
+                          </Button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="paste" className="mt-0 outline-none">
+                  <div className="relative rounded-2xl overflow-hidden border border-white/10 focus-within:border-blue-500/50 focus-within:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
+                    <div className="absolute top-0 inset-x-0 h-10 bg-black/40 border-b border-white/5 flex items-center px-4 z-10">
+                      <div className="flex gap-1.5">
+                        <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
+                        <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/50" />
+                        <div className="h-2.5 w-2.5 rounded-full bg-green-500/50" />
+                      </div>
+                      <span className="ml-4 text-xs font-mono text-slate-500">raw-email-headers.txt</span>
+                    </div>
+                    <Textarea
+                      placeholder={`Paste raw email headers and body here...\n\nFrom: security@micros0ft-verify.com\nTo: user@company.com\nSubject: Urgent: Verify Your Microsoft Account\nDate: Thu, 23 Jul 2026 08:34:00 +0000\n...\n`}
+                      className="min-h-[360px] sm:min-h-[420px] font-mono text-xs sm:text-sm bg-[#0a0f1c] border-none pt-14 pb-4 px-4 sm:px-6 resize-none focus-visible:ring-0 text-slate-300 placeholder:text-slate-600 leading-relaxed"
+                      value={rawEmail}
+                      onChange={(e) => setRawEmail(e.target.value)}
+                    />
+                  </div>
+                </TabsContent>
+
+                {/* Analysis Progress */}
+                <AnimatePresence>
+                  {analyzing && (
                     <motion.div
-                      key="file"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="flex flex-col items-center gap-3"
+                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                      animate={{ opacity: 1, height: "auto", marginTop: 24 }}
+                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      className="overflow-hidden"
                     >
-                      <div className="h-14 w-14 rounded-xl bg-[rgba(16,185,129,0.12)] border border-[rgba(16,185,129,0.2)] flex items-center justify-center">
-                        <File className="h-7 w-7 text-[#10b981]" />
+                      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 relative">
+                        <div className="absolute top-0 right-0 p-4 opacity-20">
+                          <Zap className="h-24 w-24 text-purple-500" />
+                        </div>
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <div className="relative flex h-4 w-4">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-4 w-4 bg-purple-500"></span>
+                              </div>
+                              <span className="text-base font-semibold text-white">
+                                AI Analysis in Progress
+                              </span>
+                            </div>
+                            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+                              {progress}%
+                            </span>
+                          </div>
+
+                          <div className="h-2 rounded-full bg-black/40 overflow-hidden mb-6 border border-white/5">
+                            <motion.div
+                              animate={{ width: `${progress}%` }}
+                              transition={{ duration: 0.4, ease: "easeOut" }}
+                              className="h-full bg-gradient-to-r from-purple-500 to-blue-500 relative"
+                            >
+                              <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px] animate-[shimmer_1s_linear_infinite]" />
+                            </motion.div>
+                          </div>
+
+                          <div className="grid sm:grid-cols-2 gap-y-3 gap-x-6">
+                            {analysisSteps.map((step, i) => (
+                              <div key={i} className="flex items-center gap-3">
+                                {step.done ? (
+                                  <div className="h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                                    <CheckCircle2 className="h-3.5 w-3.5 text-green-400" />
+                                  </div>
+                                ) : progress > (i - 1) * 20 ? (
+                                  <div className="h-5 w-5 rounded-full border-2 border-purple-500 border-t-transparent animate-spin shrink-0" />
+                                ) : (
+                                  <div className="h-5 w-5 rounded-full border border-white/10 shrink-0" />
+                                )}
+                                <span className={cn(
+                                  "text-sm transition-colors duration-300",
+                                  step.done ? "text-slate-300" : progress > (i - 1) * 20 ? "text-white font-medium" : "text-slate-500"
+                                )}>
+                                  {step.label}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-white">{uploadedFile.name}</p>
-                        <p className="text-xs text-[#555] mt-0.5">
-                          {(uploadedFile.size / 1024).toFixed(1)} KB
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setUploadedFile(null);
-                        }}
-                        className="text-xs text-[#666] hover:text-white flex items-center gap-1 transition-colors"
-                      >
-                        <X className="h-3 w-3" /> Remove
-                      </button>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="empty"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="flex flex-col items-center gap-3"
-                    >
-                      <div className="h-14 w-14 rounded-xl bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center">
-                        <Upload className={cn("h-7 w-7", isDragActive ? "text-[#10b981]" : "text-[#444]")} />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-white">
-                          {isDragActive ? "Drop your email here" : "Drop email file here"}
-                        </p>
-                        <p className="text-xs text-[#555] mt-1">
-                          Supports .eml and .msg formats · Max 25 MB
-                        </p>
-                      </div>
-                      <Button variant="outline" size="sm" type="button">
-                        Browse Files
-                      </Button>
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* Action Bar */}
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/10">
+                  <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <ShieldAlert className="h-4 w-4 text-purple-400" />
+                    Powered by Sentinel AI Engine
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto px-10 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]"
+                    onClick={handleAnalyze}
+                    disabled={(!uploadedFile && !rawEmail.trim()) || analyzing}
+                    loading={analyzing}
+                  >
+                    {!analyzing && <Search className="mr-2 h-5 w-5" />}
+                    {analyzing ? "Processing..." : "Analyze Email"}
+                  </Button>
+                </div>
               </div>
-            </TabsContent>
+            </Tabs>
+          </Card>
+        </motion.div>
 
-            <TabsContent value="paste">
-              <Textarea
-                placeholder={`Paste raw email headers and body here...\n\nFrom: security@micros0ft-verify.com\nTo: user@company.com\nSubject: Urgent: Verify Your Microsoft Account\nDate: Thu, 23 Jul 2026 08:34:00 +0000\n...\n`}
-                className="min-h-[200px] font-mono text-xs"
-                value={rawEmail}
-                onChange={(e) => setRawEmail(e.target.value)}
-              />
-            </TabsContent>
-          </Tabs>
-
-          {/* Analysis progress */}
-          <AnimatePresence>
-            {analyzing && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-6 p-4 rounded-xl bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.15)]"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  >
-                    <Zap className="h-4 w-4 text-[#10b981]" />
-                  </motion.div>
-                  <span className="text-sm font-medium text-[#10b981]">
-                    Analyzing... {progress}%
-                  </span>
-                </div>
-
-                {/* Progress bar */}
-                <div className="h-1.5 rounded-full bg-[rgba(255,255,255,0.08)] overflow-hidden mb-4">
-                  <motion.div
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.4 }}
-                    className="h-full rounded-full bg-[#10b981]"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {analysisSteps.map((step, i) => (
-                    <div key={i} className="flex items-center gap-1.5 text-xs">
-                      {step.done ? (
-                        <CheckCircle2 className="h-3 w-3 text-[#22c55e] shrink-0" />
-                      ) : (
-                        <div className="h-3 w-3 rounded-full border border-[rgba(255,255,255,0.1)] shrink-0" />
-                      )}
-                      <span className={step.done ? "text-[#888]" : "text-[#444]"}>{step.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="mt-5 flex items-center justify-between">
-            <p className="text-xs text-[#555]">
-              Results available in <span className="text-[#10b981]">&lt; 3 seconds</span>
-            </p>
-            <Button
-              size="lg"
-              onClick={handleAnalyze}
-              disabled={(!uploadedFile && !rawEmail.trim()) || analyzing}
-              loading={analyzing}
-            >
-              <Zap className="mr-2 h-4 w-4" />
-              {analyzing ? "Analyzing..." : "Analyze Now"}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Recent uploads */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-sm">Recent Uploads</CardTitle>
-            <Link href="/dashboard/history">
-              <Button variant="ghost" size="sm" className="h-7 text-xs text-[#666]">
-                View All <ChevronRight className="ml-1 h-3 w-3" />
+        {/* Sidebar */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-6"
+        >
+          {/* Quick Actions */}
+          <Card className="p-5 bg-gradient-to-br from-[#111827] to-[#1e1b4b]/50 border-purple-500/20">
+            <h3 className="text-sm font-semibold text-white mb-4">Quick Actions</h3>
+            <div className="space-y-2">
+              <Button variant="secondary" className="w-full justify-start rounded-xl bg-white/5 hover:bg-white/10 border-white/5">
+                <FileText className="mr-3 h-4 w-4 text-purple-400" /> View Sample Report
               </Button>
-            </Link>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="space-y-2">
-            {recentScans.slice(0, 5).map((scan, i) => {
-              const threat = getThreatLevel(scan.threatScore);
-              return (
-                <motion.div
-                  key={scan.id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  whileHover={{ backgroundColor: "rgba(255,255,255,0.02)" }}
-                  className="flex items-center gap-3 rounded-lg p-2.5 -mx-2.5 cursor-pointer transition-colors"
-                >
-                  <div
-                    className="h-8 w-8 shrink-0 rounded-lg flex items-center justify-center"
-                    style={{ backgroundColor: `${threat.color}12` }}
-                  >
-                    <Mail className="h-4 w-4" style={{ color: threat.color }} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">{scan.subject}</p>
-                    <div className="flex items-center gap-1.5 mt-0.5">
-                      <Clock className="h-3 w-3 text-[#444]" />
-                      <span className="text-xs text-[#555]">{formatDate(scan.receivedAt)}</span>
+              <Button variant="secondary" className="w-full justify-start rounded-xl bg-white/5 hover:bg-white/10 border-white/5">
+                <Globe className="mr-3 h-4 w-4 text-blue-400" /> Check Domain Rep
+              </Button>
+            </div>
+          </Card>
+
+          {/* Recent Uploads */}
+          <Card className="p-0 overflow-hidden border-white/10">
+            <div className="p-5 border-b border-white/5 flex items-center justify-between bg-black/20">
+              <h3 className="text-sm font-semibold text-white">Recent Scans</h3>
+              <Link href="/dashboard/history" className="text-xs text-purple-400 hover:text-purple-300 flex items-center">
+                View All <ArrowRight className="ml-1 h-3 w-3" />
+              </Link>
+            </div>
+            <div className="divide-y divide-white/5">
+              {recentScans.slice(0, 4).map((scan) => {
+                const threat = getThreatLevel(scan.threatScore);
+                return (
+                  <Link key={scan.id} href="/dashboard/report" className="block hover:bg-white/[0.02] transition-colors p-4">
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="h-8 w-8 shrink-0 rounded-lg flex items-center justify-center border mt-0.5"
+                        style={{ backgroundColor: threat.bg, borderColor: `${threat.color}30` }}
+                      >
+                        <Mail className="h-4 w-4" style={{ color: threat.color }} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-white truncate mb-1">{scan.subject}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-slate-500 flex items-center gap-1">
+                            <Clock className="h-3 w-3" /> {formatDate(scan.receivedAt).split(',')[0]}
+                          </span>
+                          <span className="text-xs font-bold" style={{ color: threat.color }}>
+                            {scan.threatScore}/100
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-sm font-bold" style={{ color: threat.color }}>
-                      {scan.threatScore}
-                    </span>
-                    <Badge
-                      style={{
-                        backgroundColor: threat.bg,
-                        color: threat.color,
-                        borderColor: `${threat.color}30`,
-                      }}
-                      className="text-[10px]"
-                    >
-                      {threat.label}
-                    </Badge>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </Card>
+        </motion.div>
+      </div>
     </div>
   );
 }
