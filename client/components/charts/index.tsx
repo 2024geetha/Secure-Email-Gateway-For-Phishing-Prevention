@@ -33,7 +33,7 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#111] px-3 py-2 shadow-xl">
+    <div className="rounded-lg border border-[rgba(168,85,247,0.25)] bg-[#0a0014] px-3 py-2 shadow-xl">
       {label && <p className="text-xs text-[#666] mb-1">{label}</p>}
       {payload.map((entry, i) => (
         <div key={i} className="flex items-center gap-2">
@@ -58,8 +58,8 @@ export function WeeklyScansChart({ data, className }: ChartProps) {
       <AreaChart data={data} margin={{ top: 5, right: 5, bottom: 0, left: -20 }}>
         <defs>
           <linearGradient id="scansGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#10b981" stopOpacity={0.15} />
-            <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+            <stop offset="5%" stopColor="#a855f7" stopOpacity={0.15} />
+            <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
           </linearGradient>
           <linearGradient id="threatsGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#ef4444" stopOpacity={0.15} />
@@ -73,7 +73,7 @@ export function WeeklyScansChart({ data, className }: ChartProps) {
         <Area
           type="monotone"
           dataKey="scans"
-          stroke="#10b981"
+          stroke="#a855f7"
           strokeWidth={1.5}
           fill="url(#scansGrad)"
           dot={false}
@@ -92,7 +92,7 @@ export function WeeklyScansChart({ data, className }: ChartProps) {
 }
 
 // Threat categories pie chart
-const PIE_COLORS = ["#10b981", "#ef4444", "#f59e0b", "#6366f1", "#ec4899"];
+const PIE_COLORS = ["#a855f7", "#ef4444", "#f59e0b", "#6366f1", "#ec4899"];
 
 export function ThreatCategoriesPie({ data, className }: ChartProps) {
   return (
@@ -126,7 +126,7 @@ export function TopBrandsChart({ data, className }: ChartProps) {
         <XAxis dataKey="name" tick={{ fill: "#555", fontSize: 10 }} axisLine={false} tickLine={false} />
         <YAxis tick={{ fill: "#555", fontSize: 10 }} axisLine={false} tickLine={false} />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="value" fill="#10b981" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="value" fill="#a855f7" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -157,10 +157,10 @@ export function ThreatRadarChart({ data, className }: ChartProps) {
   return (
     <ResponsiveContainer width="100%" height={220} className={className}>
       <RadarChart cx="50%" cy="50%" outerRadius={80} data={data}>
-        <PolarGrid stroke="rgba(255,255,255,0.08)" />
+        <PolarGrid stroke="rgba(168,85,247,0.2)" />
         <PolarAngleAxis dataKey="subject" tick={{ fill: "#666", fontSize: 11 }} />
         <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: "#444", fontSize: 10 }} />
-        <Radar name="Threat Level" dataKey="A" stroke="#10b981" fill="#10b981" fillOpacity={0.12} strokeWidth={1.5} />
+        <Radar name="Threat Level" dataKey="A" stroke="#a855f7" fill="#a855f7" fillOpacity={0.12} strokeWidth={1.5} />
         <Tooltip content={<CustomTooltip />} />
       </RadarChart>
     </ResponsiveContainer>
@@ -171,7 +171,7 @@ export function ThreatRadarChart({ data, className }: ChartProps) {
 export function SimpleAreaChart({
   data,
   dataKey,
-  color = "#10b981",
+  color = "#a855f7",
   className,
 }: ChartProps & { dataKey: string; color?: string }) {
   return (

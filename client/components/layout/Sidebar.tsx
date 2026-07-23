@@ -45,13 +45,13 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       initial={false}
       animate={{ width: collapsed ? 64 : 240 }}
       transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed left-0 top-0 bottom-0 z-30 flex flex-col border-r border-[rgba(255,255,255,0.06)] bg-[#050505] overflow-hidden"
+      className="fixed left-0 top-0 bottom-0 z-30 flex flex-col border-r border-[rgba(168,85,247,0.15)] bg-[#000000] overflow-hidden"
     >
       {/* Logo */}
-      <div className="flex h-14 items-center px-4 border-b border-[rgba(255,255,255,0.06)]">
+      <div className="flex h-14 items-center px-4 border-b border-[rgba(168,85,247,0.15)]">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[rgba(16,185,129,0.15)] border border-[rgba(16,185,129,0.25)]">
-            <Shield className="h-4 w-4 text-[#10b981]" />
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[rgba(168,85,247,0.15)] border border-[rgba(168,85,247,0.25)]">
+            <Shield className="h-4 w-4 text-[#a855f7]" />
           </div>
           <AnimatePresence>
             {!collapsed && (
@@ -96,18 +96,18 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 className={cn(
                   "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors group relative",
                   active
-                    ? "bg-[rgba(16,185,129,0.1)] text-[#10b981]"
+                    ? "bg-[rgba(168,85,247,0.1)] text-[#a855f7]"
                     : "text-[#888] hover:text-white hover:bg-[rgba(255,255,255,0.04)]"
                 )}
               >
                 {active && (
                   <motion.div
                     layoutId="sidebar-active"
-                    className="absolute inset-0 rounded-lg bg-[rgba(16,185,129,0.08)] border border-[rgba(16,185,129,0.15)]"
+                    className="absolute inset-0 rounded-lg bg-[rgba(168,85,247,0.08)] border border-[rgba(168,85,247,0.15)]"
                     transition={{ type: "spring", bounce: 0.1, duration: 0.4 }}
                   />
                 )}
-                <Icon className={cn("h-4 w-4 shrink-0 relative z-10", active && "text-[#10b981]")} />
+                <Icon className={cn("h-4 w-4 shrink-0 relative z-10", active && "text-[#a855f7]")} />
                 <AnimatePresence>
                   {!collapsed && (
                     <motion.span
@@ -128,7 +128,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       </nav>
 
       {/* Bottom */}
-      <div className="border-t border-[rgba(255,255,255,0.06)] py-3 px-2 space-y-0.5">
+      <div className="border-t border-[rgba(168,85,247,0.15)] py-3 px-2 space-y-0.5">
         {bottomItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;
@@ -138,7 +138,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 className={cn(
                   "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors",
                   active
-                    ? "text-[#10b981] bg-[rgba(16,185,129,0.08)]"
+                    ? "text-[#a855f7] bg-[rgba(168,85,247,0.08)]"
                     : "text-[#888] hover:text-white hover:bg-[rgba(255,255,255,0.04)]"
                 )}
               >

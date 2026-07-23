@@ -10,11 +10,11 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#030712] relative overflow-hidden">
+    <div className="min-h-screen bg-[#000000] relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
       <div className="glow-blob bg-purple-600/20 w-[600px] h-[600px] top-[-200px] left-[-200px]" />
-      <div className="glow-blob bg-blue-600/20 w-[500px] h-[500px] bottom-[-100px] right-[-100px]" />
+      <div className="glow-blob bg-fuchsia-600/20 w-[500px] h-[500px] bottom-[-100px] right-[-100px]" />
       
       <FloatingNavbar />
       
