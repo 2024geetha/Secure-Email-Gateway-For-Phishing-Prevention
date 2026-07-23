@@ -17,14 +17,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       default:
-        "bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] border border-white/10",
+        "bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] border border-purple-500/20",
       outline:
         "border border-[rgba(255,255,255,0.12)] bg-transparent text-white hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)]",
       ghost: "bg-transparent text-[#cbd5e1] hover:bg-[rgba(255,255,255,0.05)] hover:text-white",
       destructive:
-        "bg-gradient-to-r from-[#ef4444] to-[#dc2626] text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] border border-white/10",
+        "bg-gradient-to-r from-[#ef4444] to-[#dc2626] text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] border border-purple-500/20",
       secondary:
-        "bg-[#1e293b] text-white hover:bg-[#334155] border border-[rgba(255,255,255,0.08)]",
+        "bg-[#1e293b] text-white hover:bg-[#334155] border border-[rgba(168,85,247,0.2)]",
       link: "text-[#8b5cf6] underline-offset-4 hover:underline p-0 h-auto",
     };
 

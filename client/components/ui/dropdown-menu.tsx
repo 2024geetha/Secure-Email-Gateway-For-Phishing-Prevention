@@ -21,7 +21,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-xl border border-[rgba(255,255,255,0.1)] bg-[#111] p-1 text-white shadow-2xl",
+        "z-50 min-w-[8rem] overflow-hidden rounded-xl border border-[rgba(168,85,247,0.25)] bg-[#0a0014] p-1 text-white shadow-2xl",
         "animate-in data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}
@@ -39,8 +39,8 @@ const DropdownMenuItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-sm text-[#b3b3b3] transition-colors",
-      "hover:bg-[rgba(255,255,255,0.06)] hover:text-white",
-      "focus:bg-[rgba(255,255,255,0.06)] focus:text-white focus:outline-none",
+      "hover:bg-[rgba(168,85,247,0.15)] hover:text-white",
+      "focus:bg-[rgba(168,85,247,0.15)] focus:text-white focus:outline-none",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
       className
@@ -56,7 +56,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-[rgba(255,255,255,0.08)]", className)}
+    className={cn("-mx-1 my-1 h-px bg-[rgba(168,85,247,0.2)]", className)}
     {...props}
   />
 ));
@@ -85,7 +85,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-lg py-1.5 pl-8 pr-2 text-sm text-[#b3b3b3] transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-white focus:outline-none",
+      "relative flex cursor-pointer select-none items-center rounded-lg py-1.5 pl-8 pr-2 text-sm text-[#b3b3b3] transition-colors hover:bg-[rgba(168,85,247,0.15)] hover:text-white focus:outline-none",
       className
     )}
     checked={checked}

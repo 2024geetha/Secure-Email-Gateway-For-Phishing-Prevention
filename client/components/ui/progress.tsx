@@ -10,7 +10,7 @@ export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ className, value = 0, max = 100, color = "#10b981", ...props }, ref) => {
+  ({ className, value = 0, max = 100, color = "#a855f7", ...props }, ref) => {
     const pct = Math.min(100, Math.max(0, (value / max) * 100));
 
     return (
@@ -21,7 +21,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuemax={max}
         aria-valuenow={value}
         className={cn(
-          "relative h-1.5 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.08)]",
+          "relative h-1.5 w-full overflow-hidden rounded-full bg-[rgba(168,85,247,0.2)]",
           className
         )}
         {...props}
