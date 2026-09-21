@@ -96,16 +96,39 @@ export default function LoginPage() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(168,85,247,0.12)] border border-[rgba(168,85,247,0.25)] mb-4">
-            <Shield className="h-6 w-6 text-[#a855f7]" />
-          </div>
-          <h1 className="text-2xl font-bold text-white">Sentinel AI</h1>
-          <p className="text-sm text-[#666] mt-1">AI Email Security Copilot</p>
-        </div>
+  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(168,85,247,0.12)] border border-[rgba(168,85,247,0.25)] mb-4">
+    <Shield className="h-6 w-6 text-[#a855f7]" />
+  </div>
+
+  <h1 className="text-2xl font-bold text-white">
+    Secure Email Gateway
+  </h1>
+
+  <p className="text-sm text-[#888] mt-1">
+    Phishing Prevention & Email Threat Detection
+  </p>
+
+  <div className="mt-3 flex items-center justify-center gap-2">
+    <span className="px-2 py-1 text-xs rounded-full bg-[rgba(168,85,247,0.12)] text-[#a855f7] border border-[rgba(168,85,247,0.2)]">
+      Real-Time Analysis
+    </span>
+
+    <span className="px-2 py-1 text-xs rounded-full bg-[rgba(168,85,247,0.12)] text-[#a855f7] border border-[rgba(168,85,247,0.2)]">
+      Threat Intelligence
+    </span>
+  </div>
+</div>
 
         {/* Card */}
         <div className="rounded-2xl border border-[rgba(168,85,247,0.2)] bg-[#0a0014] p-6">
-          <h2 className="text-base font-semibold text-white mb-5">Sign in to your account</h2>
+          <h2 className="text-base font-semibold text-white">
+  Sign in to your account
+</h2>
+
+<p className="text-sm text-[#888] mb-5 mt-2">
+  Access your phishing detection dashboard, analyze suspicious emails,
+  and monitor security threats in real time.
+</p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email */}
@@ -116,7 +139,7 @@ export default function LoginPage() {
                 <Input
                   {...register("email")}
                   type="email"
-                  placeholder="alex@company.com"
+                  placeholder="user@company.com"
                   className="pl-9"
                   autoComplete="email"
                 />
@@ -200,13 +223,23 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-xs text-[#555] mt-5">
-            Don&apos;t have an account?{" "}
-            <a href="#" className="text-[#a855f7] hover:underline">
-              Sign up free
-            </a>
-          </p>
-        </div>
+  Don&apos;t have an account?{" "}
+  <a href="#" className="text-[#a855f7] hover:underline">
+    Sign up free
+  </a>
+</p>
 
+<div className="mt-5 rounded-lg border border-[rgba(168,85,247,0.15)] bg-[rgba(168,85,247,0.05)] p-3">
+  <p className="text-center text-xs text-[#888]">
+    Secure authentication protected with encrypted communication and
+    advanced phishing detection mechanisms.
+  </p>
+</div>
+
+</div>
+
+{/* Trust badges */}
+<div className="flex items-center justify-center gap-4 mt-6">
         {/* Trust badges */}
         <div className="flex items-center justify-center gap-4 mt-6">
           {["SOC 2 Type II", "GDPR Compliant", "256-bit TLS"].map((badge) => (
