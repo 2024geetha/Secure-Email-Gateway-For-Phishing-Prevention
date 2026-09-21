@@ -109,8 +109,27 @@ export default function DashboardPage() {
             </span>
             System Operational
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Security Overview</h1>
-          <p className="text-purple-200 mt-1">Real-time threat intelligence and email analysis.</p>
+         <h1 className="text-3xl font-bold text-white tracking-tight">
+  Secure Email Gateway Dashboard
+</h1>
+
+<p className="text-purple-200 mt-1">
+  Real-time phishing detection, email threat analysis, and security monitoring.
+</p>
+
+<div className="mt-4 flex flex-wrap gap-2">
+  <span className="px-3 py-1 rounded-full text-xs bg-purple-500/10 border border-purple-500/20 text-purple-300">
+    Phishing Detection
+  </span>
+
+  <span className="px-3 py-1 rounded-full text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300">
+    Threat Intelligence
+  </span>
+
+  <span className="px-3 py-1 rounded-full text-xs bg-green-500/10 border border-green-500/20 text-green-300">
+    Email Security
+  </span>
+</div>
         </motion.div>
         
         <motion.div
